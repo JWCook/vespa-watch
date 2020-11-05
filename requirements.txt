@@ -28,12 +28,12 @@ openpyxl==2.6.2
 pilkit==2.0
 Pillow==6.2.2
 psycopg2-binary==2.7.5
-pyinaturalist==0.8.0
+pyinaturalist==0.11.0
 python-dateutil==2.7.3
 pytz==2018.5
 PyYAML==5.1.1
 regex==2018.8.29
-requests==2.21.0
+requests==2.24.0
 six==1.11.0
 sqlparse==0.2.4
 tablib==0.13.0

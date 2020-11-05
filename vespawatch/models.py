@@ -21,7 +21,7 @@ from django_cleanup.signals import cleanup_pre_delete, cleanup_post_delete
 from imagekit.models import ImageSpecField
 from markdownx.models import MarkdownxField
 from pilkit.processors import SmartResize
-from pyinaturalist.rest_api import create_observations, add_photo_to_observation
+from pyinaturalist.rest_api import create_observation, add_photo_to_observation
 
 from vespawatch.utils import make_unique_filename
 
@@ -348,7 +348,7 @@ class AbstractObservation(models.Model):
                 'description': self.comments,
                 'latitude': self.latitude,
                 'longitude': self.longitude,
-
+                'taxon_id': self.taxon.inaturalist_push_taxon_id,
                 'observation_field_values_attributes':
                     [{'observation_field_id': settings.VESPAWATCH_ID_OBS_FIELD_ID, 'value': self.pk},
                     {'observation_field_id': settings.VESPAWATCH_EVIDENCE_OBS_FIELD_ID, 'value': vespawatch_evidence_value}]
@@ -472,14 +472,11 @@ class AbstractObservation(models.Model):
 
         :param access_token: as returned by pyinaturalist.rest_api.get_access_token(
         """
-
-        params_only_for_create = {'taxon_id': self.taxon.inaturalist_push_taxon_id}  # TODO: with the new sync, does it still makes sense to separate the create/update parameters?
-
-        params = {
-            'observation': {**params_only_for_create, **self._params_for_inat()}
-        }
-
-        r = create_observations(params=params, access_token=access_token, user_agent=user_agent)
+        r = create_observation(
+            **self._params_for_inat(),
+            access_token=access_token,
+            user_agent=user_agent,
+        )
         self.inaturalist_id = r[0]['id']
         self.save()
         self.push_attached_pictures_at_inaturalist(access_token=access_token, user_agent=user_agent)

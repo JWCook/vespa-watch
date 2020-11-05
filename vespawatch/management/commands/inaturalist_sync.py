@@ -90,7 +90,7 @@ class Command(VespaWatchCommand):
         If we do have an observation with that iNaturalist ID, update it.
         """
         self.w("\n3. Pull all observations from iNaturalist (based on the project)")
-        observations = get_all_observations(params={'project_id': settings.VESPAWATCH_PROJECT_ID})
+        observations = get_all_observations(project_id=settings.VESPAWATCH_PROJECT_ID)
         pulled_inat_ids = []
         for inat_observation_data in observations:
             pulled_inat_ids.append(inat_observation_data['id'])
