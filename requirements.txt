@@ -27,7 +27,7 @@ odfpy==1.4.0
 openpyxl==2.6.2
 pilkit==2.0
 Pillow==6.2.2
-psycopg2-binary==2.7.5
+psycopg2-binary==2.8.6
 pyinaturalist==0.8.0
 python-dateutil==2.7.3
 pytz==2018.5
