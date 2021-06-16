@@ -12,7 +12,7 @@ django-constance==2.6.0
 django-crispy-forms==1.8.1
 django-debug-toolbar==1.11
 -e git+https://github.com/niconoe/django-imagekit.git@b09496b05d84577d43751a10f838d0c527b6db32#egg=django_imagekit
-django-import-export==2.0.2
+django-import-export==2.5.0
 django-markdownx==3.0.1
 django-modeltranslation==0.14.2
 django-picklefield==2.0
@@ -36,7 +36,6 @@ regex==2018.8.29
 requests==2.21.0
 six==1.11.0
 sqlparse==0.2.4
-tablib==0.13.0
 typing==3.7.4
 tzlocal==1.5.1
 urllib3==1.24.2
