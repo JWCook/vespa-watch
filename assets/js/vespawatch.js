@@ -1514,7 +1514,7 @@ var VwImageDropZone = {
         paramName: 'image',
         thumbnailWidth: 150,
         maxFiles: 3,
-        maxFilesize: 5, // MB
+        maxFilesize: 12, // MB
         dictDefaultMessage: gettext('Drop up to 3 photos here to upload')
       }
     },
