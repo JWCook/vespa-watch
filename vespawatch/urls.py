@@ -46,4 +46,7 @@ urlpatterns = [
     path('api/save_management_action/', views.save_management_action, name='api_action_save'),
     path('api/get_management_action/', views.get_management_action, name='api_action_get'),
     path('api/delete_management_action/', views.delete_management_action, name='api_action_delete'),
+
+    path('api/csv_export/nests', views.csv_export_nests),
+    path('api/csv_export/individuals', views.csv_export_individuals)
 ]

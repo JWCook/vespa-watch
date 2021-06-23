@@ -1,9 +1,11 @@
+import csv
+
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.forms.models import model_to_dict
 from django.shortcuts import render, get_object_or_404
 from django.utils.translation import ugettext as _
-from django.http import JsonResponse, HttpResponseRedirect, HttpResponseForbidden
+from django.http import JsonResponse, HttpResponseRedirect, HttpResponseForbidden, HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.views.generic.base import View
 from django.views.generic.detail import BaseDetailView, SingleObjectMixin, SingleObjectTemplateResponseMixin
@@ -365,3 +367,83 @@ def save_individual_picture(request):
             return JsonResponse({'imageId': img.pk, 'type': 'IndividualPicture', 'name': img.image.name})
         else:
             return JsonResponse({'errors': form.errors}, status=400)
+
+
+def _prepare_csv_response(filename):
+    response = HttpResponse(
+        content_type='text/csv',
+    )
+
+    response['Content-Disposition'] = f'attachment; filename="{filename}"'
+    return response
+
+
+# Keys: human-readable field names. Values: model attribute OR callable (attribute gets retrieved, callable gets called)
+COMMON_OBS_FIELDS_CSV = {
+        'pk': 'pk',
+        'Observation time': 'observation_time',
+        'Species': 'taxon',
+        'Latitude': 'latitude',
+        'Longitude': 'longitude',
+        'Originates in Vespawatch': 'originates_in_vespawatch',
+        'iNaturalist ID': 'inaturalist_id',
+        'iNaturalist species': 'inaturalist_species',
+        'iNaturalist vv confirmed': 'inat_vv_confirmed',
+        'Created at': 'created_at',
+        'comments': 'comments'
+}
+
+
+def _csv_export_view(filename, qs, common_fields_dict, specific_fields_dict):
+    response = _prepare_csv_response(filename=filename)
+    writer = csv.writer(response)
+
+    # Write headers
+    writer.writerow(list(common_fields_dict) + list(specific_fields_dict))
+
+    # Write data
+    for model_instance in qs:
+        values = []
+        for attr_or_callable_name in (list(common_fields_dict.values()) + list(specific_fields_dict.values())):
+            attr = getattr(model_instance, attr_or_callable_name)
+            if callable(attr):
+                values.append(attr())
+            else:
+                values.append(attr)
+
+        writer.writerow(values)
+
+    return response
+
+
+def csv_export_nests(request):
+    specific_nest_fields_csv = {  # Same structure than COMMON_OBS_FIELDS_CSV
+        'Height': 'get_height_display',
+        'Size': 'get_size_display',
+        'Expert vv confirmed': 'expert_vv_confirmed',
+        'Municipality': 'municipality',
+        'Controlled': 'controlled',
+        'Duplicate of (pk)': 'duplicate_of'
+    }
+
+    return _csv_export_view(filename='nests.csv',
+                            qs=Nest.objects.all().order_by('-observation_time'),
+                            common_fields_dict=COMMON_OBS_FIELDS_CSV,
+                            specific_fields_dict=specific_nest_fields_csv)
+
+
+def csv_export_individuals(request):
+    specific_individual_fields_csv = {  # Same structure than COMMON_OBS_FIELDS_CSV
+        'Individual count': 'individual_count',
+        'Behaviour': 'get_behaviour_display'
+    }
+
+    return _csv_export_view(filename='individuals.csv',
+                            qs=Individual.objects.all().order_by('-observation_time'),
+                            common_fields_dict=COMMON_OBS_FIELDS_CSV,
+                            specific_fields_dict=specific_individual_fields_csv)
+
+
+# TODO next: add more specific fields for indiduals and nest
+# TODO next: add csv export for management actions
+# TODO next: ask review
