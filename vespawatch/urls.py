@@ -48,5 +48,6 @@ urlpatterns = [
     path('api/delete_management_action/', views.delete_management_action, name='api_action_delete'),
 
     path('api/csv_export/nests', views.csv_export_nests),
-    path('api/csv_export/individuals', views.csv_export_individuals)
+    path('api/csv_export/individuals', views.csv_export_individuals),
+    path('api/csv_export/management_actions', views.csv_export_management_actions)
 ]

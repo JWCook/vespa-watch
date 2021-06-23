@@ -444,6 +444,17 @@ def csv_export_individuals(request):
                             specific_fields_dict=specific_individual_fields_csv)
 
 
-# TODO next: add more specific fields for indiduals and nest
-# TODO next: add csv export for management actions
-# TODO next: ask review
+def csv_export_management_actions(request):
+    return _csv_export_view(filename='management_actions.csv',
+                            qs=ManagementAction.objects.all().order_by('-action_time'),
+                            common_fields_dict={},
+                            specific_fields_dict={
+                                'Nest (pk)': 'nest_id',
+                                'Action time': 'action_time',
+                                'User': 'user',
+                                'Outcome': 'get_outcome_display',
+                                'Duration': 'duration',
+                                'Number of people': 'number_of_persons',
+                                'Comments': 'comments'
+
+                            })
