@@ -84,7 +84,6 @@ msgstr "Date et moment d'enlevement du nid"
 
 #: assets/js/vespawatch.js:597 assets/js/vespawatch.js:1076
 #: vespawatch/static/vespawatch/js/app.min.js:1
-#, fuzzy
 #| msgid "Duration (in minutes)"
 msgid "Time spent on site (in minutes)"
 msgstr "Temps sur site (en minutes)"
