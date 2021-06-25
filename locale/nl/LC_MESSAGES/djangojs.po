@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-13 09:47+0100\n"
+"POT-Creation-Date: 2021-06-25 14:54+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -81,13 +81,13 @@ msgstr "Ja, verwijder"
 
 #: assets/js/vespawatch.js:594 assets/js/vespawatch.js:1056
 #: vespawatch/static/vespawatch/js/app.min.js:1
-msgid "Date and time"
-msgstr "Datum en tijd"
+msgid "Date and time nest removal"
+msgstr "Datum en tijd bestrijding"
 
 #: assets/js/vespawatch.js:597 assets/js/vespawatch.js:1076
 #: vespawatch/static/vespawatch/js/app.min.js:1
-msgid "Duration (in minutes)"
-msgstr "Duur (in minuten)"
+msgid "Time spent on site (in minutes)"
+msgstr "Tijd ter plaatse (in minuten)"
 
 #: assets/js/vespawatch.js:600 assets/js/vespawatch.js:1095
 #: vespawatch/static/vespawatch/js/app.min.js:1
@@ -266,6 +266,5 @@ msgstr ""
 msgid "<div>"
 msgstr ""
 
-#: vespawatch/static/vespawatch/libraries/moment/moment.min.js:1
-msgid ": "
-msgstr ": "
+#~ msgid ": "
+#~ msgstr ": "

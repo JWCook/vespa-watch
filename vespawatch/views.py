@@ -450,10 +450,10 @@ def csv_export_management_actions(request):
                             common_fields_dict={},
                             specific_fields_dict={
                                 'Nest (pk)': 'nest_id',
-                                'Action time': 'action_time',
+                                'Date and time nest removal': 'action_time',
                                 'User': 'user',
                                 'Outcome': 'get_outcome_display',
-                                'Duration': 'duration',
+                                'Time on site (in minutes)': 'duration',
                                 'Number of people': 'number_of_persons',
                                 'Comments': 'comments'
 

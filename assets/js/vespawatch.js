@@ -591,10 +591,10 @@ var VwManagementActionModal = {
       return gettext('Yes, delete')
     },
     actionTimeLabel: function () {
-      return gettext('Date and time')
+      return gettext('Date and time nest removal')
     },
     durationLabel: function () {
-      return gettext('Duration (in minutes)')
+      return gettext('Time spent on site (in minutes)')
     },
     nrPersonsLabel: function () {
       return gettext('Number of persons');
@@ -1053,7 +1053,7 @@ var VwManagementActionDisplay = {
       return gettext('Management action');
     },
     actionTimeLabel: function () {
-      return gettext('Date and time');
+      return gettext('Date and time nest removal');
     },
     commentsLabel: function () {
       return gettext('Comments');
@@ -1073,7 +1073,7 @@ var VwManagementActionDisplay = {
       }
     },
     durationLabel: function () {
-      return gettext('Duration (in minutes)');
+      return gettext('Time spent on site (in minutes)');
     },
     _actionId : function () {
       if (this.newActionId == null) {

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-13 09:47+0100\n"
+"POT-Creation-Date: 2021-06-25 14:28+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -217,16 +217,16 @@ msgid "Outcome"
 msgstr "Resultaat"
 
 #: vespawatch/models.py:742
-msgid "Date and time"
-msgstr "Datum en tijd"
+msgid "Date and time nest removal"
+msgstr "Datum en tijd bestrijding"
 
 #: vespawatch/models.py:743
 msgid "Reported by"
 msgstr "Gerapporteerd door"
 
 #: vespawatch/models.py:744
-msgid "Duration (in minutes)"
-msgstr "Duur (in minuten)"
+msgid "Time on site (in minutes)"
+msgstr "Tijd ter plaatse (in minuten)"
 
 #: vespawatch/models.py:745
 msgid "Number of persons"
@@ -561,11 +561,11 @@ msgstr ""
 msgid "Save"
 msgstr "Bewaar"
 
-#: vespawatch/views.py:89 vespawatch/views.py:116
+#: vespawatch/views.py:91 vespawatch/views.py:118
 msgid ""
 "Your observation was successfully created. Thanks for your contribution!"
 msgstr "Je observatie werd bewaard. Bedankt voor je bijdrage!"
 
-#: vespawatch/views.py:144
+#: vespawatch/views.py:146
 msgid "Your profile was successfully updated."
 msgstr "Je profiel is gewijzigd."
