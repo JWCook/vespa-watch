@@ -122,7 +122,8 @@ NestImageFormset = inlineformset_factory(Nest, NestPicture, fields=('image',), e
 class ManagementActionForm(ModelForm):
     class Meta:
         model = ManagementAction
-        fields = ['user', 'nest', 'outcome', 'action_time', 'duration', 'person_name', 'comments', 'number_of_persons', 'site']
+        fields = ['user', 'nest', 'outcome', 'action_time', 'duration', 'person_name', 'comments', 'number_of_persons',
+                  'site', 'nest_type']
 
         field_classes = {
             'action_time': ISODateTimeField,

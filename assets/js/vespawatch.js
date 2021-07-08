@@ -535,11 +535,13 @@ var VwManagementActionModal = {
     return {
       actionOutcomesUrl: VWConfig.apis.actionOutcomesUrl,
       actionNestSitesUrl: VWConfig.apis.actionNestSitesUrl,
+      actionsNestTypesUrl: VWConfig.apis.actionNestTypesUrl,
       saveActionUrl: VWConfig.apis.actionSaveUrl,
       loadActionUrl: VWConfig.apis.actionLoadUrl,
       deleteActionUrl: VWConfig.apis.actionDeleteUrl,
       availabeOutcomes: [],
       availabeNestSites: [],
+      availabeNestTypes: [],
 
       errors: [],
 
@@ -551,6 +553,7 @@ var VwManagementActionModal = {
       duration: '',  // In seconds
 
       nestSite: null,
+      nestType: null,
 
       deleteConfirmation: false  // The user has asked to delete, we're asking confirmation (instead of the usual form)
     }
@@ -563,6 +566,9 @@ var VwManagementActionModal = {
   computed: {
     availabeNestSitesOptional: function() {
       return [{label: '-----', value: null}].concat(this.availabeNestSites);
+    },
+    availabeNestTypesOptional: function() {
+      return [{label: '-----', value: null}].concat(this.availabeNestTypes);
     },
     durationInMinutes: {
       get: function () {
@@ -611,6 +617,9 @@ var VwManagementActionModal = {
     nestSiteLabel: function () {
       return gettext('Nest site')
     },
+    nestTypeLabel: function () {
+      return gettext('Nest type')
+    },
     nameLabel: function () {
       return gettext('Reported by')
     },
@@ -633,7 +642,7 @@ var VwManagementActionModal = {
           this.personName = response.data.person_name;
           this.comments = response.data.comments;
           this.nestSite = response.data.nest_site;
-
+          this.nestType = response.data.nest_type;
         })
     },
     deleteAction: function () {
@@ -657,7 +666,8 @@ var VwManagementActionModal = {
       params.append('outcome', this.outcome);
       params.append('person_name', this.personName);
       params.append('duration', this.duration);
-      params.append('site', this.nestSite)
+      params.append('site', this.nestSite);
+      params.append('nest_type', this.nestType);
 
       if (this.mode === 'edit') {
         // We give the actionId to the server so it can perform an update
@@ -695,6 +705,15 @@ var VwManagementActionModal = {
           console.log(error);
         });
     },
+    loadNestTypes: function () {
+      return axios.get(this.actionsNestTypesUrl)
+        .then(response => {
+          this.availabeNestTypes = response.data;
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    },
   },
   mounted: function () {
     // We load the "outcomes" list, and we're in edit mode, we populate the form from the server
@@ -705,6 +724,12 @@ var VwManagementActionModal = {
     });
 
     this.loadNestSites().then(() => {
+      if (this.mode === 'edit') {
+        this.populateFromServer()
+      }
+    });
+
+    this.loadNestTypes().then(() => {
       if (this.mode === 'edit') {
         this.populateFromServer()
       }
@@ -777,7 +802,13 @@ var VwManagementActionModal = {
                 <select v-model="nestSite" class="form-control" id="nestSite">
                   <option :value="nestSite.value" v-for="nestSite in availabeNestSitesOptional">{{ nestSite.label }}</option>
                 </select>
-              </div>    
+              </div>
+              <div class="form-group">
+                <label for="nestType">{{ nestTypeLabel }}</label>
+                <select v-model="nestType" class="form-control" id="nestType">
+                  <option :value="nestType.value" v-for="nestType in availabeNestTypesOptional">{{ nestType.label }}</option>
+                </select>
+              </div>
             </form>
           </div>
           <div class="modal-footer">

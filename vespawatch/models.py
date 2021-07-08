@@ -128,8 +128,10 @@ class VespawatchNewlyCreatedObservationsManager(models.Manager):
 class TaxonMatchError(Exception):
     """Unable to match this (iNaturalist) taxon id to our Taxon table"""
 
+
 class ParseDateError(Exception):
     """Cannot parse this date"""
+
 
 def inat_data_confirms_vv(inaturalist_data):
     """Takes a bunch of data coming from inaturalist and returns a value according to the community ID:
@@ -752,6 +754,20 @@ class ManagementAction(models.Model):
         (SITE_UNKNOWN, _('Unknown')),
     )
 
+    TYPE_ACTIVE_EMBRYO = 'AE'
+    TYPE_ACTIVE_PRIMARY = 'AP'
+    TYPE_ACTIVE_SECONDARY = 'AS'
+    TYPE_INACTIVE_EMPTY = 'IE'
+    TYPE_UNKNOWN = 'UK'
+
+    NEST_TYPE_CHOICES = (
+        (TYPE_ACTIVE_EMBRYO, _('Active embryo')),
+        (TYPE_ACTIVE_PRIMARY, _('Active primary')),
+        (TYPE_ACTIVE_SECONDARY, _('Active secondary')),
+        (TYPE_INACTIVE_EMPTY, _('Inactive/empty nest')),
+        (TYPE_UNKNOWN, _('Unknown'))
+    )
+
     nest = models.OneToOneField(Nest, on_delete=models.CASCADE, primary_key=True)
     user = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
     outcome = models.CharField(verbose_name=_("Outcome"), max_length=2, choices=OUTCOME_CHOICE)
@@ -762,6 +778,7 @@ class ManagementAction(models.Model):
     comments = models.TextField(verbose_name=_("Comments"), blank=True)
 
     site = models.CharField(verbose_name=_("Nest site"), max_length=7, choices=NEST_SITE_CHOICE, blank=True)
+    nest_type = models.CharField(verbose_name=_('Nest type'), max_length=2, choices=NEST_TYPE_CHOICES, blank=True)
 
     @property
     def duration_in_seconds(self):

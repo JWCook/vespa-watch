@@ -282,6 +282,10 @@ def management_actions_nest_sites_json(request):
     return JsonResponse([{'value': nest_site[0], 'label': nest_site[1]} for nest_site in nest_sites], safe=False)
 
 
+def management_actions_nest_types_json(request):
+    nest_types = ManagementAction.NEST_TYPE_CHOICES
+    return JsonResponse([{'value': nest_type[0], 'label': nest_type[1]} for nest_type in nest_types], safe=False)
+
 @ajax_login_required
 @csrf_exempt
 def delete_management_action(request):
@@ -333,6 +337,10 @@ def get_management_action(request):
         if action_site_prepared == '':
             action_site_prepared = None
 
+        action_nest_type_prepared = action.nest_type
+        if action_nest_type_prepared == '':
+            action_nest_type_prepared = None
+
         return JsonResponse({'action_time': action.action_time,
                              'comments': action.comments,
                              'outcome':action.outcome,
@@ -340,7 +348,8 @@ def get_management_action(request):
                              'duration': action.duration_in_seconds,
                              'number_of_persons': action.number_of_persons,
                              'person_name': action.person_name,
-                             'nest_site': action_site_prepared})
+                             'nest_site': action_site_prepared,
+                             'nest_type': action_nest_type_prepared})
 
 
 def get_nest_picture(request, pk=None):
