@@ -43,6 +43,7 @@ urlpatterns = [
     path('api/nest_pictures/<int:pk>', views.get_nest_picture, name='api_single_nest_picture'),
 
     path('api/action_outcomes/', views.management_actions_outcomes_json, name='api_action_outcomes'),
+    path('api/action_nest_sites', views.management_actions_nest_sites_json, name='api_action_nest_sites'),
     path('api/save_management_action/', views.save_management_action, name='api_action_save'),
     path('api/get_management_action/', views.get_management_action, name='api_action_get'),
     path('api/delete_management_action/', views.delete_management_action, name='api_action_delete'),

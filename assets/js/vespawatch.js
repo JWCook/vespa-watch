@@ -534,10 +534,12 @@ var VwManagementActionModal = {
   data: function () {
     return {
       actionOutcomesUrl: VWConfig.apis.actionOutcomesUrl,
+      actionNestSitesUrl: VWConfig.apis.actionNestSitesUrl,
       saveActionUrl: VWConfig.apis.actionSaveUrl,
       loadActionUrl: VWConfig.apis.actionLoadUrl,
       deleteActionUrl: VWConfig.apis.actionDeleteUrl,
       availabeOutcomes: [],
+      availabeNestSites: [],
 
       errors: [],
 
@@ -548,6 +550,8 @@ var VwManagementActionModal = {
       personName: '',
       duration: '',  // In seconds
 
+      nestSite: null,
+
       deleteConfirmation: false  // The user has asked to delete, we're asking confirmation (instead of the usual form)
     }
   },
@@ -557,6 +561,9 @@ var VwManagementActionModal = {
     actionId: Number // If mode === 'edit': the ManagementAction ID
   },
   computed: {
+    availabeNestSitesOptional: function() {
+      return [{label: '-----', value: null}].concat(this.availabeNestSites);
+    },
     durationInMinutes: {
       get: function () {
         if (this.duration !== '') {
@@ -571,7 +578,6 @@ var VwManagementActionModal = {
         }
       }
     },
-
     modalTitle: function () {
       return this.mode === 'add' ? gettext('New management action') : gettext('Edit management action')
     },
@@ -602,6 +608,9 @@ var VwManagementActionModal = {
     outcomeLabel: function () {
       return gettext('Outcome')
     },
+    nestSiteLabel: function () {
+      return gettext('Nest site')
+    },
     nameLabel: function () {
       return gettext('Reported by')
     },
@@ -623,6 +632,7 @@ var VwManagementActionModal = {
           this.nrPersons = response.data.number_of_persons;
           this.personName = response.data.person_name;
           this.comments = response.data.comments;
+          this.nestSite = response.data.nest_site;
 
         })
     },
@@ -647,6 +657,7 @@ var VwManagementActionModal = {
       params.append('outcome', this.outcome);
       params.append('person_name', this.personName);
       params.append('duration', this.duration);
+      params.append('site', this.nestSite)
 
       if (this.mode === 'edit') {
         // We give the actionId to the server so it can perform an update
@@ -674,11 +685,26 @@ var VwManagementActionModal = {
         .catch(function (error) {
           console.log(error);
         });
-    }
+    },
+    loadNestSites: function () {
+      return axios.get(this.actionNestSitesUrl)
+        .then(response => {
+          this.availabeNestSites = response.data;
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    },
   },
   mounted: function () {
     // We load the "outcomes" list, and we're in edit mode, we populate the form from the server
     this.loadOutcomes().then(() => {
+      if (this.mode === 'edit') {
+        this.populateFromServer()
+      }
+    });
+
+    this.loadNestSites().then(() => {
       if (this.mode === 'edit') {
         this.populateFromServer()
       }
@@ -745,7 +771,13 @@ var VwManagementActionModal = {
               <div class="form-group">
                 <label for="comments">{{ commentsLabel }}</label>
                 <textarea v-model="comments" class="form-control" type="text" id="comments" rows="3"></textarea>
-              </div>
+              </div> 
+              <div class="form-group">
+                <label for="nestSite">{{ nestSiteLabel }}</label>
+                <select v-model="nestSite" class="form-control" id="nestSite">
+                  <option :value="nestSite.value" v-for="nestSite in availabeNestSitesOptional">{{ nestSite.label }}</option>
+                </select>
+              </div>    
             </form>
           </div>
           <div class="modal-footer">

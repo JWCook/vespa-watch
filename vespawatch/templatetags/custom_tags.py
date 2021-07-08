@@ -8,6 +8,7 @@ from markdownx.utils import markdownify
 
 register = template.Library()
 
+
 @register.simple_tag(takes_context=True)
 def js_config_object(context):
     conf = {
@@ -16,10 +17,10 @@ def js_config_object(context):
         'baseUrl': settings.VESPAWATCH_BASE_SITE_URL,
         'staticRoot': settings.STATIC_URL,
         'apis': {
-            #'observationsUrl': reverse('vespawatch:api_observations'),
             'individualsUrl': reverse('vespawatch:api_individuals'),
             'nestsUrl': reverse('vespawatch:api_nests'),
             'actionOutcomesUrl': reverse('vespawatch:api_action_outcomes'),
+            'actionNestSitesUrl': reverse('vespawatch:api_action_nest_sites'),
             'actionSaveUrl': reverse('vespawatch:api_action_save'),
             'actionLoadUrl': reverse('vespawatch:api_action_get'),
             'actionDeleteUrl': reverse('vespawatch:api_action_delete'),

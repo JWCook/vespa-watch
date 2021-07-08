@@ -736,6 +736,22 @@ class ManagementAction(models.Model):
         (UNKNOWN, _('Unknown')),
     )
 
+    SITE_OUTSIDE_NOT_COVERED_BUILDING = 'O_NC_B'
+    SITE_OUTSIDE_NOT_COVERED_TREE = 'O_NC_T'
+    SITE_OUTSIDE_COVERED_CONSTRUCTION = 'O_C_C'
+    SITE_OUTSIDE_NATURALLY_COVERED = 'O_N_C'
+    SITE_INSIDE_IN_BUILDING = 'I'
+    SITE_UNKNOWN = 'UK'
+
+    NEST_SITE_CHOICE = (
+        (SITE_OUTSIDE_NOT_COVERED_BUILDING, _('Outside, not covered on building')),
+        (SITE_OUTSIDE_NOT_COVERED_TREE, _('Outside, not covered in tree or bush')),
+        (SITE_OUTSIDE_COVERED_CONSTRUCTION, _('Outside, covered by construction')),
+        (SITE_OUTSIDE_NATURALLY_COVERED, _('Outside, naturally covered')),
+        (SITE_INSIDE_IN_BUILDING, _('Inside, in building or construction')),
+        (SITE_UNKNOWN, _('Unknown')),
+    )
+
     nest = models.OneToOneField(Nest, on_delete=models.CASCADE, primary_key=True)
     user = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
     outcome = models.CharField(verbose_name=_("Outcome"), max_length=2, choices=OUTCOME_CHOICE)
@@ -744,6 +760,8 @@ class ManagementAction(models.Model):
     duration = models.DurationField(verbose_name=_("Time on site (in minutes)"), null=True, blank=True)
     number_of_persons = models.IntegerField(verbose_name=_("Number of persons"), null=True)
     comments = models.TextField(verbose_name=_("Comments"), blank=True)
+
+    site = models.CharField(verbose_name=_("Nest site"), max_length=7, choices=NEST_SITE_CHOICE, blank=True)
 
     @property
     def duration_in_seconds(self):

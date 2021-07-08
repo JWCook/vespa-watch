@@ -277,6 +277,11 @@ def management_actions_outcomes_json(request):
     return JsonResponse([{'value': outcome[0], 'label': outcome[1]} for outcome in outcomes], safe=False)
 
 
+def management_actions_nest_sites_json(request):
+    nest_sites = ManagementAction.NEST_SITE_CHOICE
+    return JsonResponse([{'value': nest_site[0], 'label': nest_site[1]} for nest_site in nest_sites], safe=False)
+
+
 @ajax_login_required
 @csrf_exempt
 def delete_management_action(request):
@@ -307,6 +312,10 @@ def save_management_action(request):
         try:
             form_data_copy = form.data.copy()
             form_data_copy['user'] = request.user.id
+            for k, v in form_data_copy.items():
+                if v == 'null':
+                    form_data_copy[k] = None
+
             form.data = form_data_copy
             action = form.save()
             return JsonResponse({'result': 'OK', 'actionId': action.pk}, status=201)
@@ -320,13 +329,18 @@ def get_management_action(request):
         action_id = request.GET.get('action_id')
         action = get_object_or_404(ManagementAction, pk=action_id)
 
+        action_site_prepared = action.site
+        if action_site_prepared == '':
+            action_site_prepared = None
+
         return JsonResponse({'action_time': action.action_time,
                              'comments': action.comments,
                              'outcome':action.outcome,
                              'outcome_display':action.get_outcome_display(),
                              'duration': action.duration_in_seconds,
                              'number_of_persons': action.number_of_persons,
-                             'person_name': action.person_name})
+                             'person_name': action.person_name,
+                             'nest_site': action_site_prepared})
 
 
 def get_nest_picture(request, pk=None):
