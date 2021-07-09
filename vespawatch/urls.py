@@ -32,7 +32,6 @@ urlpatterns = [
     path('profile', views.profile, name='profile'),
 
     # API paths
-    #path('api/observations/', views.observations_json, name='api_observations'),  TODO can we remove this one?
     path('api/individuals/', views.individuals_json, name='api_individuals'),
     path('api/individuals/<int:pk>', views.single_individual_json, name='api_single_individual'), # TODO can we remove this one?
     path('api/individual_pictures/', views.save_individual_picture, name='api_individual_picture'),

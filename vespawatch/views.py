@@ -172,38 +172,6 @@ def obs_create(request):
 # ==============
 # API methods
 # ==============
-
-def observations_json(request):
-    """
-    Return all observations as JSON data.
-    """
-    # TODO: can we deprecate this function? + If so, can we remove the prefetch_related('pictures') from the get_observations function?
-
-    obs_type = request.GET.get('type', None)
-    include_individuals = (obs_type == 'individual' or obs_type is None)
-    include_nests = (obs_type == 'nest' or obs_type is None)
-
-    limit = request.GET.get('limit', None)
-    limit = int(limit) if limit is not None else None
-
-    obs = get_observations(include_individuals=include_individuals,
-                           include_nests=include_nests,
-                           limit=limit)
-
-    light = request.GET.get('light', None)
-
-    if light:
-        response = JsonResponse({
-            'observations': [model_to_dict(x) for x in obs]
-        })
-    else:
-        response = JsonResponse({
-            'observations': [x.as_dict() for x in obs]
-        })
-
-    return response
-
-
 def individuals_json(request):
     """
     Return all individuals as JSON data.
@@ -287,6 +255,7 @@ def delete_management_action(request):
         else:
             return HttpResponseForbidden('Unauthorized')
         return JsonResponse({'result': 'OK'})
+
 
 @ajax_login_required
 @csrf_exempt
