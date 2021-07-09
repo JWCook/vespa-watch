@@ -355,8 +355,7 @@ COMMON_OBS_FIELDS_CSV = {
         'Latitude': 'latitude',
         'Longitude': 'longitude',
         'Originates in Vespawatch': 'originates_in_vespawatch',
-        'iNaturalist ID': 'inaturalist_id',
-        'iNaturalist species': 'inaturalist_species',
+        'iNaturalist ID': 'inaturalist_id'
 }
 
 
