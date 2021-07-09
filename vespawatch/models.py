@@ -26,6 +26,7 @@ from pyinaturalist.rest_api import create_observations, add_photo_to_observation
 from vespawatch.utils import make_unique_filename
 
 INAT_VV_TAXONS_IDS = (119019, 560197) # At iNaturalist, those taxon IDS represents Vespa velutina and subspecies
+VV_TAXON_ID = 1  # In our database, Vespa velutina always has this ID
 
 logger = logging.getLogger(__name__)
 
@@ -449,7 +450,6 @@ class AbstractObservation(models.Model):
         self.observation_time = observation_time
 
         self.comments = inat_observation_data['description'] or ''
-
 
         # Update taxon
         # -------------

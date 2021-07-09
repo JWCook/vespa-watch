@@ -17,7 +17,7 @@ from vespawatch.utils import ajax_login_required
 from .forms import ManagementActionForm, IndividualForm, IndividualPictureForm, \
     NestForm, NestPictureForm, ProfileForm
 from .models import Individual, Nest, ManagementAction, IdentificationCard, \
-    get_observations, get_individuals, get_nests, IndividualPicture, NestPicture, Profile
+    get_observations, get_individuals, get_nests, IndividualPicture, NestPicture, Profile, VV_TAXON_ID
 
 
 class CustomBaseDetailView(SingleObjectMixin, View):
@@ -357,9 +357,6 @@ COMMON_OBS_FIELDS_CSV = {
         'Originates in Vespawatch': 'originates_in_vespawatch',
         'iNaturalist ID': 'inaturalist_id',
         'iNaturalist species': 'inaturalist_species',
-        'iNaturalist vv confirmed': 'inat_vv_confirmed',
-        'Created at': 'created_at',
-        'comments': 'comments'
 }
 
 
@@ -385,30 +382,26 @@ def _csv_export_view(filename, qs, common_fields_dict, specific_fields_dict):
     return response
 
 
-def csv_export_nests(request):
+def csv_export_vv_confirmed_nests(request):
     specific_nest_fields_csv = {  # Same structure than COMMON_OBS_FIELDS_CSV
         'Height': 'get_height_display',
-        'Size': 'get_size_display',
-        'Expert vv confirmed': 'expert_vv_confirmed',
-        'Municipality': 'municipality',
-        'Controlled': 'controlled',
-        'Duplicate of (pk)': 'duplicate_of'
+        'Size': 'get_size_display'
     }
 
     return _csv_export_view(filename='nests.csv',
-                            qs=Nest.objects.all().order_by('-observation_time'),
+                            qs=Nest.objects.filter(inat_vv_confirmed=True, taxon_id=VV_TAXON_ID).order_by('-observation_time'),
                             common_fields_dict=COMMON_OBS_FIELDS_CSV,
                             specific_fields_dict=specific_nest_fields_csv)
 
 
-def csv_export_individuals(request):
+def csv_export_vv_confirmed_individuals(request):
     specific_individual_fields_csv = {  # Same structure than COMMON_OBS_FIELDS_CSV
         'Individual count': 'individual_count',
         'Behaviour': 'get_behaviour_display'
     }
 
     return _csv_export_view(filename='individuals.csv',
-                            qs=Individual.objects.all().order_by('-observation_time'),
+                            qs=Individual.objects.filter(inat_vv_confirmed=True, taxon_id=VV_TAXON_ID).order_by('-observation_time'),
                             common_fields_dict=COMMON_OBS_FIELDS_CSV,
                             specific_fields_dict=specific_individual_fields_csv)
 
@@ -425,5 +418,4 @@ def csv_export_management_actions(request):
                                 'Time on site (in minutes)': 'duration',
                                 'Number of people': 'number_of_persons',
                                 'Comments': 'comments'
-
                             })
