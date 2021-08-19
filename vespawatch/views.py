@@ -17,7 +17,7 @@ from vespawatch.utils import ajax_login_required
 from .forms import ManagementActionForm, IndividualForm, IndividualPictureForm, \
     NestForm, NestPictureForm, ProfileForm
 from .models import Individual, Nest, ManagementAction, IdentificationCard, \
-    get_observations, get_individuals, get_nests, IndividualPicture, NestPicture, Profile
+    get_observations, get_individuals, get_nests, IndividualPicture, NestPicture, Profile, VV_TAXON_ID
 
 
 class CustomBaseDetailView(SingleObjectMixin, View):
@@ -172,38 +172,6 @@ def obs_create(request):
 # ==============
 # API methods
 # ==============
-
-def observations_json(request):
-    """
-    Return all observations as JSON data.
-    """
-    # TODO: can we deprecate this function? + If so, can we remove the prefetch_related('pictures') from the get_observations function?
-
-    obs_type = request.GET.get('type', None)
-    include_individuals = (obs_type == 'individual' or obs_type is None)
-    include_nests = (obs_type == 'nest' or obs_type is None)
-
-    limit = request.GET.get('limit', None)
-    limit = int(limit) if limit is not None else None
-
-    obs = get_observations(include_individuals=include_individuals,
-                           include_nests=include_nests,
-                           limit=limit)
-
-    light = request.GET.get('light', None)
-
-    if light:
-        response = JsonResponse({
-            'observations': [model_to_dict(x) for x in obs]
-        })
-    else:
-        response = JsonResponse({
-            'observations': [x.as_dict() for x in obs]
-        })
-
-    return response
-
-
 def individuals_json(request):
     """
     Return all individuals as JSON data.
@@ -296,6 +264,7 @@ def delete_management_action(request):
         else:
             return HttpResponseForbidden('Unauthorized')
         return JsonResponse({'result': 'OK'})
+
 
 @ajax_login_required
 @csrf_exempt
@@ -409,11 +378,7 @@ COMMON_OBS_FIELDS_CSV = {
         'Latitude': 'latitude',
         'Longitude': 'longitude',
         'Originates in Vespawatch': 'originates_in_vespawatch',
-        'iNaturalist ID': 'inaturalist_id',
-        'iNaturalist species': 'inaturalist_species',
-        'iNaturalist vv confirmed': 'inat_vv_confirmed',
-        'Created at': 'created_at',
-        'comments': 'comments'
+        'iNaturalist ID': 'inaturalist_id'
 }
 
 
@@ -439,30 +404,26 @@ def _csv_export_view(filename, qs, common_fields_dict, specific_fields_dict):
     return response
 
 
-def csv_export_nests(request):
+def csv_export_vv_confirmed_nests(request):
     specific_nest_fields_csv = {  # Same structure than COMMON_OBS_FIELDS_CSV
         'Height': 'get_height_display',
-        'Size': 'get_size_display',
-        'Expert vv confirmed': 'expert_vv_confirmed',
-        'Municipality': 'municipality',
-        'Controlled': 'controlled',
-        'Duplicate of (pk)': 'duplicate_of'
+        'Size': 'get_size_display'
     }
 
     return _csv_export_view(filename='nests.csv',
-                            qs=Nest.objects.all().order_by('-observation_time'),
+                            qs=Nest.objects.filter(inat_vv_confirmed=True, taxon_id=VV_TAXON_ID).order_by('-observation_time'),
                             common_fields_dict=COMMON_OBS_FIELDS_CSV,
                             specific_fields_dict=specific_nest_fields_csv)
 
 
-def csv_export_individuals(request):
+def csv_export_vv_confirmed_individuals(request):
     specific_individual_fields_csv = {  # Same structure than COMMON_OBS_FIELDS_CSV
         'Individual count': 'individual_count',
         'Behaviour': 'get_behaviour_display'
     }
 
     return _csv_export_view(filename='individuals.csv',
-                            qs=Individual.objects.all().order_by('-observation_time'),
+                            qs=Individual.objects.filter(inat_vv_confirmed=True, taxon_id=VV_TAXON_ID).order_by('-observation_time'),
                             common_fields_dict=COMMON_OBS_FIELDS_CSV,
                             specific_fields_dict=specific_individual_fields_csv)
 
@@ -479,5 +440,4 @@ def csv_export_management_actions(request):
                                 'Time on site (in minutes)': 'duration',
                                 'Number of people': 'number_of_persons',
                                 'Comments': 'comments'
-
                             })

@@ -32,7 +32,6 @@ urlpatterns = [
     path('profile', views.profile, name='profile'),
 
     # API paths
-    #path('api/observations/', views.observations_json, name='api_observations'),  TODO can we remove this one?
     path('api/individuals/', views.individuals_json, name='api_individuals'),
     path('api/individuals/<int:pk>', views.single_individual_json, name='api_single_individual'), # TODO can we remove this one?
     path('api/individual_pictures/', views.save_individual_picture, name='api_individual_picture'),
@@ -49,7 +48,7 @@ urlpatterns = [
     path('api/get_management_action/', views.get_management_action, name='api_action_get'),
     path('api/delete_management_action/', views.delete_management_action, name='api_action_delete'),
 
-    path('api/csv_export/nests', views.csv_export_nests),
-    path('api/csv_export/individuals', views.csv_export_individuals),
-    path('api/csv_export/management_actions', views.csv_export_management_actions)
+    path('api/csv_export/vv_confirmed_nests/', views.csv_export_vv_confirmed_nests),
+    path('api/csv_export/vv_confirmed_individuals/', views.csv_export_vv_confirmed_individuals),
+    path('api/csv_export/management_actions/', views.csv_export_management_actions)
 ]
