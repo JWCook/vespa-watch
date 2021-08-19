@@ -6,7 +6,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('vespawatch', '0041_auto_20201030_1401'),
+        ('vespawatch', '0042_auto_20210709_0946'),
     ]
 
     operations = [
@@ -14,15 +14,5 @@ class Migration(migrations.Migration):
             model_name='managementaction',
             name='site',
             field=models.CharField(blank=True, choices=[('O_NC_B', 'Outside, not covered on building'), ('O_NC_T', 'Outside, not covered in tree or bush'), ('O_C_C', 'Outside, covered by construction'), ('O_N_C', 'Outside, naturally covered'), ('I', 'Inside, in building or construction'), ('UK', 'Unknown')], max_length=7, verbose_name='Nest site'),
-        ),
-        migrations.AlterField(
-            model_name='managementaction',
-            name='action_time',
-            field=models.DateTimeField(verbose_name='Date and time nest removal'),
-        ),
-        migrations.AlterField(
-            model_name='managementaction',
-            name='duration',
-            field=models.DurationField(blank=True, null=True, verbose_name='Time on site (in minutes)'),
         ),
     ]
