@@ -22,6 +22,7 @@ def js_config_object(context):
             'actionOutcomesUrl': reverse('vespawatch:api_action_outcomes'),
             'actionNestSitesUrl': reverse('vespawatch:api_action_nest_sites'),
             'actionNestTypesUrl': reverse('vespawatch:api_action_nest_types'),
+            'actionAftercareUrl': reverse('vespawatch:api_action_aftercare'),
             'actionSaveUrl': reverse('vespawatch:api_action_save'),
             'actionLoadUrl': reverse('vespawatch:api_action_get'),
             'actionDeleteUrl': reverse('vespawatch:api_action_delete'),

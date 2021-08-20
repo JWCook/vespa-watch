@@ -768,6 +768,18 @@ class ManagementAction(models.Model):
         (TYPE_UNKNOWN, _('Unknown'))
     )
 
+    AFTERCARE_NEST_COMPLETELY_REMOVED = 'NCR'
+    AFTERCARE_NEST_PARTIALLY_REMOVED = 'NPR'
+    AFTERCARE_NEST_NOT_REMOVED = 'NNR'
+    AFTERCARE_UNKNOWN = 'UK'
+
+    AFTERCARE_CHOICES = (
+        (AFTERCARE_NEST_COMPLETELY_REMOVED, _('Nest completely removed')),
+        (AFTERCARE_NEST_PARTIALLY_REMOVED, _('Nest partially removed')),
+        (AFTERCARE_NEST_NOT_REMOVED, _('Nest not removed')),
+        (AFTERCARE_UNKNOWN, _('Unknown')),
+    )
+
     nest = models.OneToOneField(Nest, on_delete=models.CASCADE, primary_key=True)
     user = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
     outcome = models.CharField(verbose_name=_("Outcome"), max_length=2, choices=OUTCOME_CHOICE)
@@ -779,6 +791,7 @@ class ManagementAction(models.Model):
 
     site = models.CharField(verbose_name=_("Nest site"), max_length=7, choices=NEST_SITE_CHOICE, blank=True)
     nest_type = models.CharField(verbose_name=_('Nest type'), max_length=2, choices=NEST_TYPE_CHOICES, blank=True)
+    aftercare = models.CharField(verbose_name=_('Aftercare'), max_length=3, choices=AFTERCARE_CHOICES, blank=True)
 
     @property
     def duration_in_seconds(self):
