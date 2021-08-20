@@ -559,7 +559,8 @@ var VwManagementActionModal = {
             nestType: null,
             aftercare: null,
 
-            deleteConfirmation: false  // The user has asked to delete, we're asking confirmation (instead of the usual form)
+            deleteConfirmation: false,  // The user has asked to delete, we're asking confirmation (instead of the usual form)
+            showAdvancedFields: false
         }
     },
     props: {
@@ -688,63 +689,63 @@ var VwManagementActionModal = {
                 params.append('action_id', this.actionId);
             }
 
-      var vm = this;
-      axios.post(this.saveActionUrl, params)
-        .then(function (response) {
-          if (response.data.result === 'OK') {
-            actionId = response.data.actionId;
-            vm.$emit('data-changed', actionId);
-            vm.$emit('close');
-          }
-        })
-        .catch(function (error) {
-          vm.errors = error.response.data.errors;
-        });
+            var vm = this;
+            axios.post(this.saveActionUrl, params)
+                .then(function (response) {
+                    if (response.data.result === 'OK') {
+                        actionId = response.data.actionId;
+                        vm.$emit('data-changed', actionId);
+                        vm.$emit('close');
+                    }
+                })
+                .catch(function (error) {
+                    vm.errors = error.response.data.errors;
+                });
+        },
+        loadOutcomes: function () {
+            return axios.get(this.actionOutcomesUrl)
+                .then(response => {
+                    this.availableOutcomes = response.data;
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+        },
+        loadNestSites: function () {
+            return axios.get(this.actionNestSitesUrl)
+                .then(response => {
+                    this.availableNestSites = response.data;
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+        },
+        loadNestTypes: function () {
+            return axios.get(this.actionsNestTypesUrl)
+                .then(response => {
+                    this.availableNestTypes = response.data;
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+        },
+        loadAftercare: function () {
+            return axios.get(this.actionsAftercareUrl)
+                .then(response => {
+                    this.availableAftercare = response.data;
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+        },
     },
-    loadOutcomes: function () {
-      return axios.get(this.actionOutcomesUrl)
-        .then(response => {
-          this.availableOutcomes = response.data;
-        })
-        .catch(function (error) {
-          console.log(error);
+    mounted: function () {
+        // We load the "outcomes" list, and we're in edit mode, we populate the form from the server
+        this.loadOutcomes().then(() => {
+            if (this.mode === 'edit') {
+                this.populateFromServer()
+            }
         });
-    },
-    loadNestSites: function () {
-      return axios.get(this.actionNestSitesUrl)
-        .then(response => {
-          this.availableNestSites = response.data;
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
-    },
-    loadNestTypes: function () {
-      return axios.get(this.actionsNestTypesUrl)
-        .then(response => {
-          this.availableNestTypes = response.data;
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
-    },
-    loadAftercare: function () {
-      return axios.get(this.actionsAftercareUrl)
-        .then(response => {
-          this.availableAftercare = response.data;
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
-    },
-  },
-  mounted: function () {
-    // We load the "outcomes" list, and we're in edit mode, we populate the form from the server
-    this.loadOutcomes().then(() => {
-      if (this.mode === 'edit') {
-        this.populateFromServer()
-      }
-    });
 
         this.loadNestSites().then(() => {
             if (this.mode === 'edit') {
@@ -770,8 +771,8 @@ var VwManagementActionModal = {
     <div class="modal-mask">
     <div class="modal-wrapper">
 
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
+    <div class="modal-dialog modal-dialog-scrollable" role="document">
+      <div class="modal-content" style="overflow-y:auto;">
         <div class="modal-header">
           <h5 class="modal-title">{{ modalTitle }}</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -825,25 +826,30 @@ var VwManagementActionModal = {
               <div class="form-group">
                 <label for="comments">{{ commentsLabel }}</label>
                 <textarea v-model="comments" class="form-control" type="text" id="comments" rows="3"></textarea>
+              </div>
+              <div class="form-group">
+                <a class="text-primary" @click="showAdvancedFields = !showAdvancedFields">Show/hide advanced fields</a>
               </div> 
-              <div class="form-group">
-                <label for="nestSite">{{ nestSiteLabel }}</label>
-                <select v-model="nestSite" class="form-control" id="nestSite">
-                  <option :value="nestSite.value" v-for="nestSite in availableNestSitesOptional">{{ nestSite.label }}</option>
-                </select>
-              </div>
-              <div class="form-group">
-                <label for="nestType">{{ nestTypeLabel }}</label>
-                <select v-model="nestType" class="form-control" id="nestType">
-                  <option :value="nestType.value" v-for="nestType in availableNestTypesOptional">{{ nestType.label }}</option>
-                </select>
-              </div>
-              <div class="form-group">
-                <label for="aftercare">{{ aftercareLabel }}</label>
-                <select v-model="aftercare" class="form-control" id="aftercare">
-                  <option :value="aftercare.value" v-for="aftercare in availableAftercareOptional">{{ aftercare.label }}</option>
-                </select>
-              </div>
+              <div v-show="showAdvancedFields">
+                    <div class="form-group">
+                        <label for="nestSite">{{ nestSiteLabel }}</label>
+                        <select v-model="nestSite" class="form-control" id="nestSite">
+                            <option :value="nestSite.value" v-for="nestSite in availableNestSitesOptional">{{ nestSite.label }}</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="nestType">{{ nestTypeLabel }}</label>
+                        <select v-model="nestType" class="form-control" id="nestType">
+                            <option :value="nestType.value" v-for="nestType in availableNestTypesOptional">{{ nestType.label }}</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="aftercare">{{ aftercareLabel }}</label>
+                        <select v-model="aftercare" class="form-control" id="aftercare">
+                            <option :value="aftercare.value" v-for="aftercare in availableAftercareOptional">{{ aftercare.label }}</option>
+                        </select>
+                    </div>   
+              </div>        
             </form>
           </div>
           <div class="modal-footer">
@@ -1390,7 +1396,7 @@ var VwLocationSelectorMap = {
             if (this.marker != undefined) {
                 this.map.removeLayer(this.marker);
             }
-            ; // Only one!
+             // Only one!
 
             // Create the marker
             this.marker = L.marker([lng, lat], {
