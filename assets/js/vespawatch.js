@@ -540,9 +540,9 @@ var VwManagementActionModal = {
       saveActionUrl: VWConfig.apis.actionSaveUrl,
       loadActionUrl: VWConfig.apis.actionLoadUrl,
       deleteActionUrl: VWConfig.apis.actionDeleteUrl,
-      availabeOutcomes: [],
-      availabeNestSites: [],
-      availabeNestTypes: [],
+      availableOutcomes: [],
+      availableNestSites: [],
+      availableNestTypes: [],
       availableAftercare: [],
 
       errors: [],
@@ -567,13 +567,13 @@ var VwManagementActionModal = {
     actionId: Number // If mode === 'edit': the ManagementAction ID
   },
   computed: {
-    availabeNestSitesOptional: function() {
-      return [{label: '-----', value: null}].concat(this.availabeNestSites);
+    availableNestSitesOptional: function() {
+      return [{label: '-----', value: null}].concat(this.availableNestSites);
     },
-    availabeNestTypesOptional: function() {
-      return [{label: '-----', value: null}].concat(this.availabeNestTypes);
+    availableNestTypesOptional: function() {
+      return [{label: '-----', value: null}].concat(this.availableNestTypes);
     },
-    availabeAftercareOptional: function() {
+    availableAftercareOptional: function() {
       return [{label: '-----', value: null}].concat(this.availableAftercare);
     },
     durationInMinutes: {
@@ -643,7 +643,6 @@ var VwManagementActionModal = {
     populateFromServer: function () {
       axios.get(this.loadActionUrl, {params: {'action_id': this.actionId}})
         .then(response => {
-          console.log('Received response', response);
           this.actionTime = response.data.action_time;
           this.outcome = response.data.outcome;
           this.duration = response.data.duration;
@@ -701,7 +700,7 @@ var VwManagementActionModal = {
     loadOutcomes: function () {
       return axios.get(this.actionOutcomesUrl)
         .then(response => {
-          this.availabeOutcomes = response.data;
+          this.availableOutcomes = response.data;
         })
         .catch(function (error) {
           console.log(error);
@@ -710,7 +709,7 @@ var VwManagementActionModal = {
     loadNestSites: function () {
       return axios.get(this.actionNestSitesUrl)
         .then(response => {
-          this.availabeNestSites = response.data;
+          this.availableNestSites = response.data;
         })
         .catch(function (error) {
           console.log(error);
@@ -719,7 +718,7 @@ var VwManagementActionModal = {
     loadNestTypes: function () {
       return axios.get(this.actionsNestTypesUrl)
         .then(response => {
-          this.availabeNestTypes = response.data;
+          this.availableNestTypes = response.data;
         })
         .catch(function (error) {
           console.log(error);
@@ -812,7 +811,7 @@ var VwManagementActionModal = {
               <div class="form-group">
                 <label for="outcome">{{ outcomeLabel }}*</label>
                 <select v-model="outcome" class="form-control" id="outcome">
-                  <option :value="outcome.value" v-for="outcome in availabeOutcomes">{{ outcome.label }}</option>
+                  <option :value="outcome.value" v-for="outcome in availableOutcomes">{{ outcome.label }}</option>
                 </select>
               </div>
               <div class="form-group">
@@ -826,19 +825,19 @@ var VwManagementActionModal = {
               <div class="form-group">
                 <label for="nestSite">{{ nestSiteLabel }}</label>
                 <select v-model="nestSite" class="form-control" id="nestSite">
-                  <option :value="nestSite.value" v-for="nestSite in availabeNestSitesOptional">{{ nestSite.label }}</option>
+                  <option :value="nestSite.value" v-for="nestSite in availableNestSitesOptional">{{ nestSite.label }}</option>
                 </select>
               </div>
               <div class="form-group">
                 <label for="nestType">{{ nestTypeLabel }}</label>
                 <select v-model="nestType" class="form-control" id="nestType">
-                  <option :value="nestType.value" v-for="nestType in availabeNestTypesOptional">{{ nestType.label }}</option>
+                  <option :value="nestType.value" v-for="nestType in availableNestTypesOptional">{{ nestType.label }}</option>
                 </select>
               </div>
               <div class="form-group">
                 <label for="aftercare">{{ aftercareLabel }}</label>
                 <select v-model="aftercare" class="form-control" id="aftercare">
-                  <option :value="aftercare.value" v-for="aftercare in availabeAftercareOptional">{{ aftercare.label }}</option>
+                  <option :value="aftercare.value" v-for="aftercare in availableAftercareOptional">{{ aftercare.label }}</option>
                 </select>
               </div>
             </form>
