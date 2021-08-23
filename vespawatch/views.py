@@ -17,7 +17,8 @@ from vespawatch.utils import ajax_login_required
 from .forms import ManagementActionForm, IndividualForm, IndividualPictureForm, \
     NestForm, NestPictureForm, ProfileForm
 from .models import Individual, Nest, ManagementAction, IdentificationCard, \
-    get_observations, get_individuals, get_nests, IndividualPicture, NestPicture, Profile, VV_TAXON_ID
+    get_observations, get_individuals, get_nests, IndividualPicture, NestPicture, Profile, VV_TAXON_ID, \
+    ManagementActionProblem
 
 
 class CustomBaseDetailView(SingleObjectMixin, View):
@@ -260,6 +261,11 @@ def management_actions_aftercare_json(request):
     return JsonResponse([{'value': ac[0], 'label': ac[1]} for ac in aftercare], safe=False)
 
 
+def management_actions_problems_json(request):
+    problems = ManagementActionProblem.objects.all().order_by('display_order')
+    return JsonResponse([{'value': problem.pk, 'label': problem.description} for problem in problems], safe=False)
+
+
 @ajax_login_required
 @csrf_exempt
 def delete_management_action(request):
@@ -329,7 +335,8 @@ def get_management_action(request):
                              'person_name': action.person_name,
                              'nest_site': action_site_prepared,
                              'nest_type': action_nest_type_prepared,
-                             'aftercare': action_aftercare_prepared})
+                             'aftercare': action_aftercare_prepared,
+                             'problems': [problem.pk for problem in action.problems.all()]})
 
 
 def get_nest_picture(request, pk=None):

@@ -721,6 +721,14 @@ class NestObservationWarning(ObservationWarningBase):
     observation = models.ForeignKey(Nest, on_delete=models.CASCADE, related_name='warnings')
 
 
+class ManagementActionProblem(models.Model):
+    description = models.CharField(verbose_name=_("Description"), max_length=255)
+    display_order = models.IntegerField(verbose_name=_("Order"), unique=True)
+
+    def __str__(self):
+        return self.description
+
+
 class ManagementAction(models.Model):
     PERMAS_D_PROF = 'PP'
     PERMAS_D_CLASSIC = 'PC'
@@ -792,6 +800,8 @@ class ManagementAction(models.Model):
     site = models.CharField(verbose_name=_("Nest site"), max_length=7, choices=NEST_SITE_CHOICE, blank=True)
     nest_type = models.CharField(verbose_name=_('Nest type'), max_length=2, choices=NEST_TYPE_CHOICES, blank=True)
     aftercare = models.CharField(verbose_name=_('Aftercare'), max_length=3, choices=AFTERCARE_CHOICES, blank=True)
+    problems = models.ManyToManyField(ManagementActionProblem, blank=True)
+
 
     @property
     def duration_in_seconds(self):

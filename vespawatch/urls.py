@@ -45,11 +45,12 @@ urlpatterns = [
     path('api/action_nest_sites', views.management_actions_nest_sites_json, name='api_action_nest_sites'),
     path('api/action_nest_types', views.management_actions_nest_types_json, name='api_action_nest_types'),
     path('api/action_aftercare', views.management_actions_aftercare_json, name='api_action_aftercare'),
+    path('api/action_problems', views.management_actions_problems_json, name='api_action_problems'),
     path('api/save_management_action/', views.save_management_action, name='api_action_save'),
     path('api/get_management_action/', views.get_management_action, name='api_action_get'),
     path('api/delete_management_action/', views.delete_management_action, name='api_action_delete'),
 
     path('api/csv_export/vv_confirmed_nests/', views.csv_export_vv_confirmed_nests),
     path('api/csv_export/vv_confirmed_individuals/', views.csv_export_vv_confirmed_individuals),
-    path('api/csv_export/management_actions/', views.csv_export_management_actions)
+    path('api/csv_export/management_actions/', views.csv_export_management_actions),
 ]

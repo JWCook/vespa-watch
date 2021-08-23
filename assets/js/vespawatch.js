@@ -537,6 +537,7 @@ var VwManagementActionModal = {
             actionNestSitesUrl: VWConfig.apis.actionNestSitesUrl,
             actionsNestTypesUrl: VWConfig.apis.actionNestTypesUrl,
             actionsAftercareUrl: VWConfig.apis.actionAftercareUrl,
+            actionProblemsUrl: VWConfig.apis.actionProblemsUrl,
             saveActionUrl: VWConfig.apis.actionSaveUrl,
             loadActionUrl: VWConfig.apis.actionLoadUrl,
             deleteActionUrl: VWConfig.apis.actionDeleteUrl,
@@ -545,6 +546,7 @@ var VwManagementActionModal = {
             availableNestSites: [],
             availableNestTypes: [],
             availableAftercare: [],
+            availableProblems: [],
 
             errors: [],
 
@@ -558,6 +560,7 @@ var VwManagementActionModal = {
             nestSite: null,
             nestType: null,
             aftercare: null,
+            actionProblems: [],
 
             deleteConfirmation: false,  // The user has asked to delete, we're asking confirmation (instead of the usual form)
             showAdvancedFields: false
@@ -594,6 +597,9 @@ var VwManagementActionModal = {
         },
         modalTitle: function () {
             return this.mode === 'add' ? gettext('New management action') : gettext('Edit management action')
+        },
+        problemsLabel: function () {
+            return gettext('Problems')
         },
         saveLabel: function () {
             return gettext('Save')
@@ -657,6 +663,7 @@ var VwManagementActionModal = {
                     this.nestSite = response.data.nest_site;
                     this.nestType = response.data.nest_type;
                     this.aftercare = response.data.aftercare;
+                    this.actionProblems = response.data.problems;
                 })
         },
         deleteAction: function () {
@@ -683,6 +690,7 @@ var VwManagementActionModal = {
             params.append('site', this.nestSite);
             params.append('nest_type', this.nestType);
             params.append('aftercare', this.aftercare);
+            this.actionProblems.forEach(problem => params.append('problems', problem));
 
             if (this.mode === 'edit') {
                 // We give the actionId to the server so it can perform an update
@@ -738,6 +746,15 @@ var VwManagementActionModal = {
                     console.log(error);
                 });
         },
+        loadAvailableProblems: function () {
+            return axios.get(this.actionProblemsUrl)
+                .then(response => {
+                    this.availableProblems = response.data;
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+        }
     },
     mounted: function () {
         // We load the "outcomes" list, and we're in edit mode, we populate the form from the server
@@ -760,6 +777,11 @@ var VwManagementActionModal = {
         });
 
         this.loadAftercare().then(() => {
+            if (this.mode === 'edit') {
+                this.populateFromServer()
+            }
+        });
+        this.loadAvailableProblems().then(() => {
             if (this.mode === 'edit') {
                 this.populateFromServer()
             }
@@ -848,7 +870,16 @@ var VwManagementActionModal = {
                         <select v-model="aftercare" class="form-control" id="aftercare">
                             <option :value="aftercare.value" v-for="aftercare in availableAftercareOptional">{{ aftercare.label }}</option>
                         </select>
-                    </div>   
+                    </div>
+                    <div class="form-group">
+                        <div>{{ problemsLabel }}</div>
+                        <div class="form-check" v-for="problem in availableProblems">
+                            <input class="form-check-input" type="checkbox" :value="problem.value" :id="problem.value" v-model="actionProblems">
+                            <label class="form-check-label" :for="problem.value">
+                                {{ problem.label}}
+                            </label>
+                        </div>
+                    </div>
               </div>        
             </form>
           </div>
