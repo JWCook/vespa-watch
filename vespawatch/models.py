@@ -788,6 +788,30 @@ class ManagementAction(models.Model):
         (AFTERCARE_UNKNOWN, _('Unknown')),
     )
 
+    PRODUCT_PERMAS_D = 'PD'
+    PRODUCT_LIQUID_NITROGEN = 'LN'
+    PRODUCT_VESPA = 'V'
+    PRODUCT_FICAM_D = 'FD'
+    PRODUCT_TOPSCORE_PAL = 'TP'
+    PRODUCT_ETHER_ETC = 'EE'
+    PRODUCT_DIATOMACEOUS_EARTH = 'DE'
+    PRODUCT_OTHER = 'O'
+    PRODUCT_NONE = 'N'
+    PRODUCT_UNKNOWN = 'UK'
+
+    PRODUCT_CHOICES = (
+        (PRODUCT_PERMAS_D, _('Permas-D')),
+        (PRODUCT_LIQUID_NITROGEN, _('Liquid nitrogen')),
+        (PRODUCT_VESPA, _('Vespa')),
+        (PRODUCT_FICAM_D, _('Ficam D')),
+        (PRODUCT_TOPSCORE_PAL, _('Topscore PAL')),
+        (PRODUCT_ETHER_ETC, _('Ether / acetone / ethyl acetate')),
+        (PRODUCT_DIATOMACEOUS_EARTH, _('Diatomaceous earth')),
+        (PRODUCT_OTHER, _('Other')),
+        (PRODUCT_NONE, _('None')),
+        (PRODUCT_UNKNOWN, _('Unknown'))
+    )
+
     nest = models.OneToOneField(Nest, on_delete=models.CASCADE, primary_key=True)
     user = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
     outcome = models.CharField(verbose_name=_("Outcome"), max_length=2, choices=OUTCOME_CHOICE)
@@ -801,7 +825,7 @@ class ManagementAction(models.Model):
     nest_type = models.CharField(verbose_name=_('Nest type'), max_length=2, choices=NEST_TYPE_CHOICES, blank=True)
     aftercare = models.CharField(verbose_name=_('Aftercare'), max_length=3, choices=AFTERCARE_CHOICES, blank=True)
     problems = models.ManyToManyField(ManagementActionProblem, blank=True)
-
+    product = models.CharField(verbose_name=_("Product"), max_length=3, choices=PRODUCT_CHOICES, default=PRODUCT_UNKNOWN)
 
     @property
     def duration_in_seconds(self):

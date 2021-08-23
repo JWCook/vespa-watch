@@ -266,6 +266,11 @@ def management_actions_problems_json(request):
     return JsonResponse([{'value': problem.pk, 'label': problem.description} for problem in problems], safe=False)
 
 
+def management_actions_products_json(request):
+    products = ManagementAction.PRODUCT_CHOICES
+    return JsonResponse([{'value': p[0], 'label': p[1]} for p in products], safe=False)
+
+
 @ajax_login_required
 @csrf_exempt
 def delete_management_action(request):
@@ -336,7 +341,8 @@ def get_management_action(request):
                              'nest_site': action_site_prepared,
                              'nest_type': action_nest_type_prepared,
                              'aftercare': action_aftercare_prepared,
-                             'problems': [problem.pk for problem in action.problems.all()]})
+                             'problems': [problem.pk for problem in action.problems.all()],
+                             'product': action.product})
 
 
 def get_nest_picture(request, pk=None):

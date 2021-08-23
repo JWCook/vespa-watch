@@ -538,6 +538,7 @@ var VwManagementActionModal = {
             actionsNestTypesUrl: VWConfig.apis.actionNestTypesUrl,
             actionsAftercareUrl: VWConfig.apis.actionAftercareUrl,
             actionProblemsUrl: VWConfig.apis.actionProblemsUrl,
+            actionProductsUrl: VWConfig.apis.actionProductsUrl,
             saveActionUrl: VWConfig.apis.actionSaveUrl,
             loadActionUrl: VWConfig.apis.actionLoadUrl,
             deleteActionUrl: VWConfig.apis.actionDeleteUrl,
@@ -547,6 +548,7 @@ var VwManagementActionModal = {
             availableNestTypes: [],
             availableAftercare: [],
             availableProblems: [],
+            availableProducts: [],
 
             errors: [],
 
@@ -556,6 +558,7 @@ var VwManagementActionModal = {
             outcome: '',
             personName: '',
             duration: '',  // In seconds
+            product: null,
 
             nestSite: null,
             nestType: null,
@@ -600,6 +603,9 @@ var VwManagementActionModal = {
         },
         problemsLabel: function () {
             return gettext('Problems')
+        },
+        productLabel: function() {
+            return gettext('Product')
         },
         saveLabel: function () {
             return gettext('Save')
@@ -664,6 +670,7 @@ var VwManagementActionModal = {
                     this.nestType = response.data.nest_type;
                     this.aftercare = response.data.aftercare;
                     this.actionProblems = response.data.problems;
+                    this.product = response.data.product;
                 })
         },
         deleteAction: function () {
@@ -691,6 +698,7 @@ var VwManagementActionModal = {
             params.append('nest_type', this.nestType);
             params.append('aftercare', this.aftercare);
             this.actionProblems.forEach(problem => params.append('problems', problem));
+            params.append('product', this.product);
 
             if (this.mode === 'edit') {
                 // We give the actionId to the server so it can perform an update
@@ -754,6 +762,15 @@ var VwManagementActionModal = {
                 .catch(function (error) {
                     console.log(error);
                 });
+        },
+        loadAvailableProducts: function () {
+            return axios.get(this.actionProductsUrl)
+                .then(response => {
+                    this.availableProducts = response.data;
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
         }
     },
     mounted: function () {
@@ -782,6 +799,11 @@ var VwManagementActionModal = {
             }
         });
         this.loadAvailableProblems().then(() => {
+            if (this.mode === 'edit') {
+                this.populateFromServer()
+            }
+        });
+        this.loadAvailableProducts().then(() => {
             if (this.mode === 'edit') {
                 this.populateFromServer()
             }
@@ -846,12 +868,18 @@ var VwManagementActionModal = {
                 <input v-model="personName" class="form-control" type="text" id="personName">
               </div>
               <div class="form-group">
+                <label for="product">{{ productLabel }}*</label>
+                <select v-model="product" class="form-control" id="product">
+                  <option :value="product.value" v-for="product in availableProducts">{{ product.label }}</option>
+                </select>
+              </div>
+              <div class="form-group">
                 <label for="comments">{{ commentsLabel }}</label>
                 <textarea v-model="comments" class="form-control" type="text" id="comments" rows="3"></textarea>
               </div>
               <div class="form-group">
                 <a class="text-primary" @click="showAdvancedFields = !showAdvancedFields">Show/hide advanced fields</a>
-              </div> 
+              </div>
               <div v-show="showAdvancedFields">
                     <div class="form-group">
                         <label for="nestSite">{{ nestSiteLabel }}</label>
