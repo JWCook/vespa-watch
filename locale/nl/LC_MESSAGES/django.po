@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-23 14:49+0200\n"
+"POT-Creation-Date: 2021-08-23 16:56+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -51,7 +51,7 @@ msgstr "Nesthoogte"
 msgid "Name"
 msgstr "Naam"
 
-#: vespawatch/forms.py:75 vespawatch/models.py:257 vespawatch/models.py:857
+#: vespawatch/forms.py:75 vespawatch/models.py:257 vespawatch/models.py:878
 #: vespawatch/templates/vespawatch/nest_detail.html:56
 msgid "Telephone number"
 msgstr "Telefoonnummer"
@@ -72,7 +72,7 @@ msgstr "Foto voor herkenning"
 msgid "Order"
 msgstr "Volgorde"
 
-#: vespawatch/models.py:101 vespawatch/models.py:725 vespawatch/models.py:853
+#: vespawatch/models.py:101 vespawatch/models.py:725 vespawatch/models.py:874
 #: vespawatch/templates/vespawatch/individual_create.html:76
 #: vespawatch/templates/vespawatch/nest_create.html:76
 #: vespawatch/templates/vespawatch/nest_detail.html:33
@@ -87,7 +87,7 @@ msgstr "Datum van observatie mag niet in de toekomst liggen."
 msgid "Observation date"
 msgstr "Datum van observatie"
 
-#: vespawatch/models.py:245 vespawatch/models.py:822
+#: vespawatch/models.py:245 vespawatch/models.py:842
 #: vespawatch/templates/vespawatch/nest_detail.html:47
 msgid "Comments"
 msgstr "Opmerkingen"
@@ -118,6 +118,7 @@ msgstr "iNaturalist soort"
 
 #: vespawatch/models.py:294 vespawatch/models.py:746 vespawatch/models.py:762
 #: vespawatch/models.py:776 vespawatch/models.py:788 vespawatch/models.py:812
+#: vespawatch/models.py:832
 msgid "Unknown"
 msgstr "Ongekend"
 
@@ -177,7 +178,7 @@ msgstr "Gevangen"
 msgid "Dead"
 msgstr "Dood"
 
-#: vespawatch/models.py:640 vespawatch/models.py:810
+#: vespawatch/models.py:640 vespawatch/models.py:810 vespawatch/models.py:831
 msgid "Other"
 msgstr "Andere"
 
@@ -293,55 +294,83 @@ msgstr "Diatomeënaarde"
 msgid "None"
 msgstr "Geen"
 
-#: vespawatch/models.py:817
+#: vespawatch/models.py:825
+msgid "Freezer"
+msgstr "Diepvries"
+
+#: vespawatch/models.py:826
+msgid "Telescopic handle"
+msgstr "Telescoopsteel"
+
+#: vespawatch/models.py:827
+msgid "Killing jar/box"
+msgstr "Afsluitbaar potje/doos"
+
+#: vespawatch/models.py:828
+msgid "Liquid sprayer"
+msgstr "Vloistof verstruiver"
+
+#: vespawatch/models.py:829
+msgid "Powder distributor"
+msgstr "Poeder verstuiver"
+
+#: vespawatch/models.py:830
+msgid "Nest not treated"
+msgstr "Niet behandeld"
+
+#: vespawatch/models.py:837
 msgid "Outcome"
 msgstr "Resultaat"
 
-#: vespawatch/models.py:818
+#: vespawatch/models.py:838
 msgid "Date and time nest removal"
 msgstr "Datum en tijd bestrijding"
 
-#: vespawatch/models.py:819
+#: vespawatch/models.py:839
 msgid "Reported by"
 msgstr "Gerapporteerd door"
 
-#: vespawatch/models.py:820
+#: vespawatch/models.py:840
 msgid "Time on site (in minutes)"
 msgstr "Tijd ter plaatse (in minuten)"
 
-#: vespawatch/models.py:821
+#: vespawatch/models.py:841
 msgid "Number of persons"
 msgstr "Aantal personen"
 
-#: vespawatch/models.py:824
+#: vespawatch/models.py:844
 msgid "Nest site"
 msgstr "Nest plaats"
 
-#: vespawatch/models.py:825
+#: vespawatch/models.py:845
 msgid "Nest type"
 msgstr "Nest type"
 
-#: vespawatch/models.py:826
+#: vespawatch/models.py:846
 msgid "Aftercare"
 msgstr "Nazorg"
 
-#: vespawatch/models.py:828
+#: vespawatch/models.py:848
 msgid "Product"
 msgstr "Product"
 
-#: vespawatch/models.py:852
+#: vespawatch/models.py:849
+msgid "Method"
+msgstr "Method"
+
+#: vespawatch/models.py:873
 msgid "Organization / business"
 msgstr "Organisatie / bedrijf"
 
-#: vespawatch/models.py:853
+#: vespawatch/models.py:874
 msgid "Describe the activities of your organization / business."
 msgstr "Beschrijf de activiteiten van je organisatie / bedrijf."
 
-#: vespawatch/models.py:855
+#: vespawatch/models.py:876
 msgid "Only numbers are allowed."
 msgstr "Enkel cijfers zijn toegelaten."
 
-#: vespawatch/models.py:859
+#: vespawatch/models.py:880
 msgid "Get email notifications for new nests"
 msgstr "Ontvang een email voor nieuwe nesten"
 

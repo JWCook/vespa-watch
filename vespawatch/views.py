@@ -239,26 +239,24 @@ def nests_json(request):
     return response
 
 
+def _choices_to_json(choices_tuple):
+    return JsonResponse([{'value': e[0], 'label': e[1]} for e in choices_tuple], safe=False)
+
+
 def management_actions_outcomes_json(request):
-    #TODO: Implements sorting?
-    #TODO: Implements i18n?
-    outcomes = ManagementAction.OUTCOME_CHOICE
-    return JsonResponse([{'value': outcome[0], 'label': outcome[1]} for outcome in outcomes], safe=False)
+    return _choices_to_json(ManagementAction.OUTCOME_CHOICE)
 
 
 def management_actions_nest_sites_json(request):
-    nest_sites = ManagementAction.NEST_SITE_CHOICE
-    return JsonResponse([{'value': nest_site[0], 'label': nest_site[1]} for nest_site in nest_sites], safe=False)
+    return _choices_to_json(ManagementAction.NEST_SITE_CHOICE)
 
 
 def management_actions_nest_types_json(request):
-    nest_types = ManagementAction.NEST_TYPE_CHOICES
-    return JsonResponse([{'value': nest_type[0], 'label': nest_type[1]} for nest_type in nest_types], safe=False)
+    return _choices_to_json(ManagementAction.NEST_TYPE_CHOICES)
 
 
 def management_actions_aftercare_json(request):
-    aftercare = ManagementAction.AFTERCARE_CHOICES
-    return JsonResponse([{'value': ac[0], 'label': ac[1]} for ac in aftercare], safe=False)
+    return _choices_to_json(ManagementAction.AFTERCARE_CHOICES)
 
 
 def management_actions_problems_json(request):
@@ -267,8 +265,11 @@ def management_actions_problems_json(request):
 
 
 def management_actions_products_json(request):
-    products = ManagementAction.PRODUCT_CHOICES
-    return JsonResponse([{'value': p[0], 'label': p[1]} for p in products], safe=False)
+    return _choices_to_json(ManagementAction.PRODUCT_CHOICES)
+
+
+def management_actions_methods_json(request):
+    return _choices_to_json(ManagementAction.METHOD_CHOICES)
 
 
 @ajax_login_required
@@ -313,23 +314,17 @@ def save_management_action(request):
             return JsonResponse({'result': 'NOTOK', 'errors': form.errors}, status=422)
 
 
+def _string_val_or_none(string):
+    if string == '':
+        return None
+    return string
+
+
 @ajax_login_required
 def get_management_action(request):
     if request.method == 'GET':
         action_id = request.GET.get('action_id')
         action = get_object_or_404(ManagementAction, pk=action_id)
-
-        action_site_prepared = action.site
-        if action_site_prepared == '':
-            action_site_prepared = None
-
-        action_nest_type_prepared = action.nest_type
-        if action_nest_type_prepared == '':
-            action_nest_type_prepared = None
-
-        action_aftercare_prepared = action.aftercare
-        if action_aftercare_prepared == '':
-            action_aftercare_prepared = None
 
         return JsonResponse({'action_time': action.action_time,
                              'comments': action.comments,
@@ -338,11 +333,12 @@ def get_management_action(request):
                              'duration': action.duration_in_seconds,
                              'number_of_persons': action.number_of_persons,
                              'person_name': action.person_name,
-                             'nest_site': action_site_prepared,
-                             'nest_type': action_nest_type_prepared,
-                             'aftercare': action_aftercare_prepared,
+                             'nest_site': _string_val_or_none(action.site),
+                             'nest_type': _string_val_or_none(action.nest_type),
+                             'aftercare': _string_val_or_none(action.aftercare),
                              'problems': [problem.pk for problem in action.problems.all()],
-                             'product': action.product})
+                             'product': action.product,
+                             'method': _string_val_or_none(action.method)})
 
 
 def get_nest_picture(request, pk=None):

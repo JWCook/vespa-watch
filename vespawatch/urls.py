@@ -47,6 +47,7 @@ urlpatterns = [
     path('api/action_aftercare', views.management_actions_aftercare_json, name='api_action_aftercare'),
     path('api/action_problems', views.management_actions_problems_json, name='api_action_problems'),
     path('api/action_products', views.management_actions_products_json, name='api_action_products'),
+    path('api/action_methods', views.management_actions_methods_json, name='api_action_methods'),
     path('api/save_management_action/', views.save_management_action, name='api_action_save'),
     path('api/get_management_action/', views.get_management_action, name='api_action_get'),
     path('api/delete_management_action/', views.delete_management_action, name='api_action_delete'),

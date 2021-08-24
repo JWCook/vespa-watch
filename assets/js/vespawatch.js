@@ -539,6 +539,7 @@ var VwManagementActionModal = {
             actionsAftercareUrl: VWConfig.apis.actionAftercareUrl,
             actionProblemsUrl: VWConfig.apis.actionProblemsUrl,
             actionProductsUrl: VWConfig.apis.actionProductsUrl,
+            actionMethodsUrl: VWConfig.apis.actionMethodsUrl,
             saveActionUrl: VWConfig.apis.actionSaveUrl,
             loadActionUrl: VWConfig.apis.actionLoadUrl,
             deleteActionUrl: VWConfig.apis.actionDeleteUrl,
@@ -549,6 +550,7 @@ var VwManagementActionModal = {
             availableAftercare: [],
             availableProblems: [],
             availableProducts: [],
+            availableMethods: [],
 
             errors: [],
 
@@ -564,6 +566,7 @@ var VwManagementActionModal = {
             nestType: null,
             aftercare: null,
             actionProblems: [],
+            method: null,
 
             deleteConfirmation: false,  // The user has asked to delete, we're asking confirmation (instead of the usual form)
             showAdvancedFields: false
@@ -575,6 +578,9 @@ var VwManagementActionModal = {
         actionId: Number // If mode === 'edit': the ManagementAction ID
     },
     computed: {
+        availableMethodsOptional: function () {
+            return this.prependNullOption(this.availableMethods);
+        },
         availableNestSitesOptional: function () {
             return this.prependNullOption(this.availableNestSites);
         },
@@ -643,6 +649,9 @@ var VwManagementActionModal = {
         aftercareLabel: function () {
             return gettext('Aftercare')
         },
+        methodLabel: function () {
+            return gettext('Method')
+        },
         nameLabel: function () {
             return gettext('Reported by')
         },
@@ -671,6 +680,7 @@ var VwManagementActionModal = {
                     this.aftercare = response.data.aftercare;
                     this.actionProblems = response.data.problems;
                     this.product = response.data.product;
+                    this.method = response.data.method;
                 })
         },
         deleteAction: function () {
@@ -699,6 +709,7 @@ var VwManagementActionModal = {
             params.append('aftercare', this.aftercare);
             this.actionProblems.forEach(problem => params.append('problems', problem));
             params.append('product', this.product);
+            params.append('method', this.method);
 
             if (this.mode === 'edit') {
                 // We give the actionId to the server so it can perform an update
@@ -771,6 +782,15 @@ var VwManagementActionModal = {
                 .catch(function (error) {
                     console.log(error);
                 });
+        },
+        loadAvailableMethods: function () {
+            return axios.get(this.actionMethodsUrl)
+                .then(response => {
+                    this.availableMethods = response.data;
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
         }
     },
     mounted: function () {
@@ -804,6 +824,11 @@ var VwManagementActionModal = {
             }
         });
         this.loadAvailableProducts().then(() => {
+            if (this.mode === 'edit') {
+                this.populateFromServer()
+            }
+        });
+        this.loadAvailableMethods().then(() => {
             if (this.mode === 'edit') {
                 this.populateFromServer()
             }
@@ -907,6 +932,12 @@ var VwManagementActionModal = {
                                 {{ problem.label}}
                             </label>
                         </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="method">{{ methodLabel }}</label>
+                        <select v-model="method" class="form-control" id="method">
+                            <option :value="method.value" v-for="method in availableMethodsOptional">{{ method.label }}</option>
+                        </select>
                     </div>
               </div>        
             </form>

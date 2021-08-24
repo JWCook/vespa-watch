@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-23 14:49+0200\n"
+"POT-Creation-Date: 2021-08-23 16:56+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -49,7 +49,7 @@ msgstr "Hauteur du nid"
 msgid "Name"
 msgstr "Nom"
 
-#: vespawatch/forms.py:75 vespawatch/models.py:257 vespawatch/models.py:857
+#: vespawatch/forms.py:75 vespawatch/models.py:257 vespawatch/models.py:878
 #: vespawatch/templates/vespawatch/nest_detail.html:56
 msgid "Telephone number"
 msgstr "Téléphone"
@@ -70,7 +70,7 @@ msgstr "Photo pour identification"
 msgid "Order"
 msgstr "Ordre"
 
-#: vespawatch/models.py:101 vespawatch/models.py:725 vespawatch/models.py:853
+#: vespawatch/models.py:101 vespawatch/models.py:725 vespawatch/models.py:874
 #: vespawatch/templates/vespawatch/individual_create.html:76
 #: vespawatch/templates/vespawatch/nest_create.html:76
 #: vespawatch/templates/vespawatch/nest_detail.html:33
@@ -85,7 +85,7 @@ msgstr "La date d'observation ne peut être dans le futur."
 msgid "Observation date"
 msgstr "Date d'observation"
 
-#: vespawatch/models.py:245 vespawatch/models.py:822
+#: vespawatch/models.py:245 vespawatch/models.py:842
 #: vespawatch/templates/vespawatch/nest_detail.html:47
 msgid "Comments"
 msgstr "Commentaires"
@@ -116,6 +116,7 @@ msgstr "Espèce (selon iNaturalist)"
 
 #: vespawatch/models.py:294 vespawatch/models.py:746 vespawatch/models.py:762
 #: vespawatch/models.py:776 vespawatch/models.py:788 vespawatch/models.py:812
+#: vespawatch/models.py:832
 msgid "Unknown"
 msgstr "Inconnu"
 
@@ -175,7 +176,7 @@ msgstr "Capturé"
 msgid "Dead"
 msgstr "Mort"
 
-#: vespawatch/models.py:640 vespawatch/models.py:810
+#: vespawatch/models.py:640 vespawatch/models.py:810 vespawatch/models.py:831
 msgid "Other"
 msgstr "Autre"
 
@@ -291,55 +292,83 @@ msgstr "Terre de diatomée"
 msgid "None"
 msgstr "Aucun"
 
-#: vespawatch/models.py:817
+#: vespawatch/models.py:825
+msgid "Freezer"
+msgstr "Congélateur"
+
+#: vespawatch/models.py:826
+msgid "Telescopic handle"
+msgstr "Telescopic poles"
+
+#: vespawatch/models.py:827
+msgid "Killing jar/box"
+msgstr "Pot ou boite verrouillable"
+
+#: vespawatch/models.py:828
+msgid "Liquid sprayer"
+msgstr "Pulvérisateur liquide"
+
+#: vespawatch/models.py:829
+msgid "Powder distributor"
+msgstr "Distributeur de poudre"
+
+#: vespawatch/models.py:830
+msgid "Nest not treated"
+msgstr "Pas traité"
+
+#: vespawatch/models.py:837
 msgid "Outcome"
 msgstr "Résultat"
 
-#: vespawatch/models.py:818
+#: vespawatch/models.py:838
 msgid "Date and time nest removal"
 msgstr "Date et moment d'enlevement du nid"
 
-#: vespawatch/models.py:819
+#: vespawatch/models.py:839
 msgid "Reported by"
 msgstr "Rapporté par"
 
-#: vespawatch/models.py:820
+#: vespawatch/models.py:840
 msgid "Time on site (in minutes)"
 msgstr "Durée sur site (en minutes)"
 
-#: vespawatch/models.py:821
+#: vespawatch/models.py:841
 msgid "Number of persons"
 msgstr "Nombre de personnes"
 
-#: vespawatch/models.py:824
+#: vespawatch/models.py:844
 msgid "Nest site"
 msgstr "Lieu de nidification"
 
-#: vespawatch/models.py:825
+#: vespawatch/models.py:845
 msgid "Nest type"
 msgstr "Genre de nid"
 
-#: vespawatch/models.py:826
+#: vespawatch/models.py:846
 msgid "Aftercare"
 msgstr "Post-traitement"
 
-#: vespawatch/models.py:828
+#: vespawatch/models.py:848
 msgid "Product"
-msgstr "Produi"
+msgstr "Produit"
 
-#: vespawatch/models.py:852
+#: vespawatch/models.py:849
+msgid "Method"
+msgstr "Méthode"
+
+#: vespawatch/models.py:873
 msgid "Organization / business"
 msgstr "Organisation / société"
 
-#: vespawatch/models.py:853
+#: vespawatch/models.py:874
 msgid "Describe the activities of your organization / business."
 msgstr "Décrivez les activitées menées par votre organisation ou société"
 
-#: vespawatch/models.py:855
+#: vespawatch/models.py:876
 msgid "Only numbers are allowed."
 msgstr "Nombres uniquement"
 
-#: vespawatch/models.py:859
+#: vespawatch/models.py:880
 msgid "Get email notifications for new nests"
 msgstr "Recevez une notification par e-mail pour les nouveaux nids."
 

@@ -812,6 +812,26 @@ class ManagementAction(models.Model):
         (PRODUCT_UNKNOWN, _('Unknown'))
     )
 
+    METHOD_FREEZER = 'FR'
+    METHOD_TELESCOPIC_HANDLE = 'TH'
+    METHOD_KILLING_JAR = 'KJ'
+    METHOD_LIQUID_SPRAYER = 'LS'
+    METHOD_POWER_DISTRIBUTOR = 'PD'
+    METHOD_NEST_NOT_TREATED = 'NNT'
+    METHOD_OTHER = 'O'
+    METHOD_UNKNOWN = 'UK'
+
+    METHOD_CHOICES = (
+        (METHOD_FREEZER, _('Freezer')),
+        (METHOD_TELESCOPIC_HANDLE, _('Telescopic handle')),
+        (METHOD_KILLING_JAR, _('Killing jar/box')),
+        (METHOD_LIQUID_SPRAYER, _('Liquid sprayer')),
+        (METHOD_POWER_DISTRIBUTOR, _('Powder distributor')),
+        (METHOD_NEST_NOT_TREATED, _('Nest not treated')),
+        (METHOD_OTHER, _('Other')),
+        (METHOD_UNKNOWN, _('Unknown'))
+    )
+
     nest = models.OneToOneField(Nest, on_delete=models.CASCADE, primary_key=True)
     user = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
     outcome = models.CharField(verbose_name=_("Outcome"), max_length=2, choices=OUTCOME_CHOICE)
@@ -826,6 +846,7 @@ class ManagementAction(models.Model):
     aftercare = models.CharField(verbose_name=_('Aftercare'), max_length=3, choices=AFTERCARE_CHOICES, blank=True)
     problems = models.ManyToManyField(ManagementActionProblem, blank=True)
     product = models.CharField(verbose_name=_("Product"), max_length=3, choices=PRODUCT_CHOICES, default=PRODUCT_UNKNOWN)
+    method = models.CharField(verbose_name=_('Method'), max_length=3, choices=METHOD_CHOICES, blank=True)
 
     @property
     def duration_in_seconds(self):
