@@ -344,7 +344,8 @@ def get_management_action(request):
                              'product': action.product,
                              'method': _string_val_or_none(action.method),
                              'result': action.result,
-                             'nest_reported_before': action.nest_reported_before
+                             'nest_reported_before': action.nest_reported_before,
+                             'file_number_nest_removal': action.file_number_nest_removal
                              },)
 
 

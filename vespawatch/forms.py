@@ -123,7 +123,8 @@ class ManagementActionForm(ModelForm):
     class Meta:
         model = ManagementAction
         fields = ['user', 'nest', 'old_outcome', 'action_time', 'duration', 'person_name', 'comments', 'number_of_persons',
-                  'site', 'nest_type', 'aftercare', 'problems', 'product', 'method', 'result', 'nest_reported_before']
+                  'site', 'nest_type', 'aftercare', 'problems', 'product', 'method', 'result', 'nest_reported_before',
+                  'file_number_nest_removal']
 
         field_classes = {
             'action_time': ISODateTimeField,

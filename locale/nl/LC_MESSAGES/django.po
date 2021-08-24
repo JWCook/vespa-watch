@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-24 16:22+0200\n"
+"POT-Creation-Date: 2021-08-24 16:33+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -51,7 +51,7 @@ msgstr "Nesthoogte"
 msgid "Name"
 msgstr "Naam"
 
-#: vespawatch/forms.py:75 vespawatch/models.py:257 vespawatch/models.py:893
+#: vespawatch/forms.py:75 vespawatch/models.py:257 vespawatch/models.py:894
 #: vespawatch/templates/vespawatch/nest_detail.html:56
 msgid "Telephone number"
 msgstr "Telefoonnummer"
@@ -72,7 +72,7 @@ msgstr "Foto voor herkenning"
 msgid "Order"
 msgstr "Volgorde"
 
-#: vespawatch/models.py:101 vespawatch/models.py:726 vespawatch/models.py:889
+#: vespawatch/models.py:101 vespawatch/models.py:726 vespawatch/models.py:890
 #: vespawatch/templates/vespawatch/individual_create.html:76
 #: vespawatch/templates/vespawatch/nest_create.html:76
 #: vespawatch/templates/vespawatch/nest_detail.html:33
@@ -378,19 +378,23 @@ msgstr "Resultaat"
 msgid "This nest been reported before"
 msgstr "Is dit nest al eerder gerapporteerd?"
 
-#: vespawatch/models.py:888
+#: vespawatch/models.py:865
+msgid "File number nest removal"
+msgstr "Dossiernummer verdelging"
+
+#: vespawatch/models.py:889
 msgid "Organization / business"
 msgstr "Organisatie / bedrijf"
 
-#: vespawatch/models.py:889
+#: vespawatch/models.py:890
 msgid "Describe the activities of your organization / business."
 msgstr "Beschrijf de activiteiten van je organisatie / bedrijf."
 
-#: vespawatch/models.py:891
+#: vespawatch/models.py:892
 msgid "Only numbers are allowed."
 msgstr "Enkel cijfers zijn toegelaten."
 
-#: vespawatch/models.py:895
+#: vespawatch/models.py:896
 msgid "Get email notifications for new nests"
 msgstr "Ontvang een email voor nieuwe nesten"
 

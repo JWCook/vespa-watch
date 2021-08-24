@@ -571,6 +571,7 @@ var VwManagementActionModal = {
             method: null,
             result: null,
             nestReportedBefore: null,
+            fileNumberNestRemoval: '',
 
             // Other
             errors: [], // validation
@@ -612,6 +613,9 @@ var VwManagementActionModal = {
         },
         modalTitle: function () {
             return this.mode === 'add' ? gettext('New management action') : gettext('Edit management action')
+        },
+        fileNumberNestRemovalLabel: function () {
+            return gettext('File number nest removal')
         },
         yesLabel: function () {
             return gettext('Yes')
@@ -701,6 +705,7 @@ var VwManagementActionModal = {
                     this.method = response.data.method;
                     this.result = response.data.result;
                     this.nestReportedBefore = response.data.nest_reported_before;
+                    this.fileNumberNestRemoval = response.data.file_number_nest_removal;
                 })
         },
         deleteAction: function () {
@@ -732,6 +737,7 @@ var VwManagementActionModal = {
             params.append('method', this.method);
             params.append('result', this.result);
             params.append('nest_reported_before', this.nestReportedBefore);
+            params.append('file_number_nest_removal', this.fileNumberNestRemoval);
 
             if (this.mode === 'edit') {
                 // We give the actionId to the server so it can perform an update
@@ -899,6 +905,10 @@ var VwManagementActionModal = {
                             <option :value="true">{{ yesLabel }}</option>
                             <option :value="false">{{ noLabel }}</option>
                         </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="fileNumberNestRemoval">{{ fileNumberNestRemovalLabel }}</label>
+                        <input v-model="fileNumberNestRemoval" class="form-control" type="text" id="fileNumberNestRemoval">
                     </div>
               </div>        
             </form>

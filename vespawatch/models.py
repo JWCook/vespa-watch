@@ -862,6 +862,7 @@ class ManagementAction(models.Model):
     method = models.CharField(verbose_name=_('Method'), max_length=3, choices=METHOD_CHOICES, blank=True)
     result = models.CharField(verbose_name=_('Result'), max_length=3, choices=RESULT_CHOICES, default=RESULT_UNKNOWN)
     nest_reported_before = models.BooleanField(verbose_name=_('This nest been reported before'), blank=True, null=True)
+    file_number_nest_removal = models.CharField(verbose_name=_('File number nest removal'), max_length=75, blank=True)
 
     @property
     def duration_in_seconds(self):
