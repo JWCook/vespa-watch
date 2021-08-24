@@ -534,7 +534,7 @@ var VwManagementActionModal = {
     data: function () {
         return {
             // API endpoints URLs
-            actionOutcomesUrl: VWConfig.apis.actionOutcomesUrl,
+            actionOldOutcomesUrl: VWConfig.apis.actionOldOutcomesUrl,
             actionNestSitesUrl: VWConfig.apis.actionNestSitesUrl,
             actionNestTypesUrl: VWConfig.apis.actionNestTypesUrl,
             actionAftercareUrl: VWConfig.apis.actionAftercareUrl,
@@ -546,7 +546,7 @@ var VwManagementActionModal = {
             deleteActionUrl: VWConfig.apis.actionDeleteUrl,
 
             // Available options (selects and checkboxes)
-            availableOutcomes: [],
+            availableOldOutcomes: [],
             availableNestSites: [],
             availableNestTypes: [],
             availableAftercare: [],
@@ -558,7 +558,7 @@ var VwManagementActionModal = {
             actionTime: '',  // As ISO3166
             comments: '',
             nrPersons: '', // number
-            outcome: '',
+            oldOutcome: '',
             personName: '',
             duration: '',  // In seconds
             product: null,
@@ -639,8 +639,8 @@ var VwManagementActionModal = {
         nrPersonsLabel: function () {
             return gettext('Number of persons');
         },
-        outcomeLabel: function () {
-            return gettext('Outcome')
+        oldOutcomeLabel: function () {
+            return gettext('Outcome (old)')
         },
         nestSiteLabel: function () {
             return gettext('Nest site')
@@ -672,7 +672,7 @@ var VwManagementActionModal = {
             axios.get(this.loadActionUrl, {params: {'action_id': this.actionId}})
                 .then(response => {
                     this.actionTime = response.data.action_time;
-                    this.outcome = response.data.outcome;
+                    this.oldOutcome = response.data.old_outcome;
                     this.duration = response.data.duration;
                     this.nrPersons = response.data.number_of_persons;
                     this.personName = response.data.person_name;
@@ -703,7 +703,7 @@ var VwManagementActionModal = {
             params.append('action_time', this.actionTime);
             params.append('comments', this.comments);
             params.append('number_of_persons', this.nrPersons);
-            params.append('outcome', this.outcome);
+            params.append('old_outcome', this.oldOutcome);
             params.append('person_name', this.personName);
             params.append('duration', this.duration);
             params.append('site', this.nestSite);
@@ -737,7 +737,7 @@ var VwManagementActionModal = {
 
         // We populate the various selects and checkboxes
         Promise.all([
-            axios.get(this.actionOutcomesUrl),
+            axios.get(this.actionOldOutcomesUrl),
             axios.get(this.actionNestSitesUrl),
             axios.get(this.actionNestTypesUrl),
             axios.get(this.actionAftercareUrl),
@@ -745,7 +745,7 @@ var VwManagementActionModal = {
             axios.get(this.actionProductsUrl),
             axios.get(this.actionMethodsUrl),
         ]).then(function (values) {
-            vm.availableOutcomes = values[0].data;
+            vm.availableOldOutcomes = values[0].data;
             vm.availableNestSites = values[1].data;
             vm.availableNestTypes = values[2].data;
             vm.availableAftercare = values[3].data;
@@ -808,9 +808,9 @@ var VwManagementActionModal = {
                 <input v-model="nrPersons" class="form-control" type="number" id="number_of_persons">
               </div>
               <div class="form-group">
-                <label for="outcome">{{ outcomeLabel }}*</label>
-                <select v-model="outcome" class="form-control" id="outcome">
-                  <option :value="outcome.value" v-for="outcome in availableOutcomes">{{ outcome.label }}</option>
+                <label for="oldOutcome">{{ oldOutcomeLabel }}*</label>
+                <select v-model="oldOutcome" class="form-control" id="oldOutcome">
+                  <option :value="oldOutcome.value" v-for="oldOutcome in availableOldOutcomes">{{ oldOutcome.label }}</option>
                 </select>
               </div>
               <div class="form-group">
@@ -1213,8 +1213,8 @@ var VwManagementActionDisplay = {
         nrPersonsLabel: function () {
             return gettext('Number of persons');
         },
-        outcomeLabel: function () {
-            return gettext('Outcome');
+        oldOutcomeLabel: function () {
+            return gettext('Outcome (old)');
         }
     },
     data: function () {
@@ -1226,7 +1226,7 @@ var VwManagementActionDisplay = {
             loadActionUrl: VWConfig.apis.actionLoadUrl,
             newActionId: null,  // can be mutated when a user adds a new action. Avoids overwriting the actionId prop
             nrPersons: null,
-            outcome: null,
+            oldOutcome: null,
             personName: null
         }
     },
@@ -1241,7 +1241,7 @@ var VwManagementActionDisplay = {
                     this.actionTime = response.data.action_time;
                     this.comments = response.data.comments;
                     this.nrPersons = response.data.number_of_persons;
-                    this.outcome = response.data.outcome_display;
+                    this.oldOutcome = response.data.old_outcome_display;
                     this.duration = response.data.duration;
                     this.personName = response.data.person_name;
                 })
@@ -1278,8 +1278,8 @@ var VwManagementActionDisplay = {
         <div class="col">{{ nrPersons }}</div>
       </div>
       <div class="row">
-        <div class="col-6 col-lg-3">{{outcomeLabel}}:</div>
-        <div class="col">{{ outcome }}</div>
+        <div class="col-6 col-lg-3">{{oldOutcomeLabel}}:</div>
+        <div class="col">{{ oldOutcome }}</div>
       </div>
       <div class="row">
         <div class="col-6 col-lg-3">{{nameLabel}}:</div>

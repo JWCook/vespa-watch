@@ -19,7 +19,7 @@ def js_config_object(context):
         'apis': {
             'individualsUrl': reverse('vespawatch:api_individuals'),
             'nestsUrl': reverse('vespawatch:api_nests'),
-            'actionOutcomesUrl': reverse('vespawatch:api_action_outcomes'),
+            'actionOldOutcomesUrl': reverse('vespawatch:api_action_old_outcomes'),
             'actionNestSitesUrl': reverse('vespawatch:api_action_nest_sites'),
             'actionNestTypesUrl': reverse('vespawatch:api_action_nest_types'),
             'actionAftercareUrl': reverse('vespawatch:api_action_aftercare'),

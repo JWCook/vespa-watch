@@ -603,8 +603,8 @@ class Nest(AbstractObservation):
             'observation_time': self.observation_time.timestamp() * 1000,
             'municipality': self.municipality,
             'comments': self.comments,
-            'action': self.managementaction.get_outcome_display() if self.controlled else '',
-            'actionCode': self.managementaction.outcome if self.controlled else '',
+            'action': self.managementaction.get_old_outcome_display() if self.controlled else '',
+            'actionCode': self.managementaction.old_outcome if self.controlled else '',
             'actionId': self.managementaction.pk if self.controlled else '',
             'actionFinished': self.controlled,
             'originates_in_vespawatch': self.  originates_in_vespawatch,
@@ -737,7 +737,7 @@ class ManagementAction(models.Model):
     NOT_TREATED = 'ND'  # previously "nothing done": : possible cleanup: create a data migration so ND -> NT?
     UNKNOWN = 'UK'
 
-    OUTCOME_CHOICE = (
+    OLD_OUTCOME_CHOICE = (
         (PERMAS_D_PROF, _('Professional permas-D treatment')),
         (PERMAS_D_CLASSIC, _('Classic permas-D treatment')),
         (REMOVAL_COMPLETE, _('Complete manual removal')),
@@ -834,7 +834,7 @@ class ManagementAction(models.Model):
 
     nest = models.OneToOneField(Nest, on_delete=models.CASCADE, primary_key=True)
     user = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
-    outcome = models.CharField(verbose_name=_("Outcome"), max_length=2, choices=OUTCOME_CHOICE)
+    old_outcome = models.CharField(verbose_name=_("Outcome (old)"), max_length=2, choices=OLD_OUTCOME_CHOICE)
     action_time = models.DateTimeField(verbose_name=_("Date and time nest removal"))
     person_name = models.CharField(verbose_name=_("Reported by"), max_length=255, blank=True)
     duration = models.DurationField(verbose_name=_("Time on site (in minutes)"), null=True, blank=True)
@@ -856,7 +856,7 @@ class ManagementAction(models.Model):
             return '' # NULL
 
     def __str__(self):
-        return f'{self.action_time.strftime("%Y-%m-%d")} {self.get_outcome_display()}'
+        return f'{self.action_time.strftime("%Y-%m-%d")} {self.get_old_outcome_display()}'
 
 
 class InatObsToDelete(models.Model):

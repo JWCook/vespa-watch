@@ -243,8 +243,8 @@ def _choices_to_json(choices_tuple):
     return JsonResponse([{'value': e[0], 'label': e[1]} for e in choices_tuple], safe=False)
 
 
-def management_actions_outcomes_json(request):
-    return _choices_to_json(ManagementAction.OUTCOME_CHOICE)
+def management_actions_old_outcomes_json(request):
+    return _choices_to_json(ManagementAction.OLD_OUTCOME_CHOICE)
 
 
 def management_actions_nest_sites_json(request):
@@ -328,8 +328,8 @@ def get_management_action(request):
 
         return JsonResponse({'action_time': action.action_time,
                              'comments': action.comments,
-                             'outcome':action.outcome,
-                             'outcome_display':action.get_outcome_display(),
+                             'old_outcome':action.old_outcome,
+                             'old_outcome_display':action.get_old_outcome_display(),
                              'duration': action.duration_in_seconds,
                              'number_of_persons': action.number_of_persons,
                              'person_name': action.person_name,
@@ -456,7 +456,7 @@ def csv_export_management_actions(request):
                                 'Nest (pk)': 'nest_id',
                                 'Date and time nest removal': 'action_time',
                                 'User': 'user',
-                                'Outcome': 'get_outcome_display',
+                                'Outcome (old)': 'get_old_outcome_display',
                                 'Time on site (in minutes)': 'duration',
                                 'Number of people': 'number_of_persons',
                                 'Comments': 'comments'
