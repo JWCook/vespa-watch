@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-24 15:17+0200\n"
+"POT-Creation-Date: 2021-08-24 16:22+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -49,7 +49,7 @@ msgstr "Hauteur du nid"
 msgid "Name"
 msgstr "Nom"
 
-#: vespawatch/forms.py:75 vespawatch/models.py:257 vespawatch/models.py:892
+#: vespawatch/forms.py:75 vespawatch/models.py:257 vespawatch/models.py:893
 #: vespawatch/templates/vespawatch/nest_detail.html:56
 msgid "Telephone number"
 msgstr "Téléphone"
@@ -70,7 +70,7 @@ msgstr "Photo pour identification"
 msgid "Order"
 msgstr "Ordre"
 
-#: vespawatch/models.py:101 vespawatch/models.py:726 vespawatch/models.py:888
+#: vespawatch/models.py:101 vespawatch/models.py:726 vespawatch/models.py:889
 #: vespawatch/templates/vespawatch/individual_create.html:76
 #: vespawatch/templates/vespawatch/nest_create.html:76
 #: vespawatch/templates/vespawatch/nest_detail.html:33
@@ -372,19 +372,23 @@ msgstr "Méthode"
 msgid "Result"
 msgstr "Résultat"
 
-#: vespawatch/models.py:887
+#: vespawatch/models.py:864
+msgid "This nest been reported before"
+msgstr "Ce nid a déja été précédemment reporté"
+
+#: vespawatch/models.py:888
 msgid "Organization / business"
 msgstr "Organisation / société"
 
-#: vespawatch/models.py:888
+#: vespawatch/models.py:889
 msgid "Describe the activities of your organization / business."
 msgstr "Décrivez les activitées menées par votre organisation ou société"
 
-#: vespawatch/models.py:890
+#: vespawatch/models.py:891
 msgid "Only numbers are allowed."
 msgstr "Nombres uniquement"
 
-#: vespawatch/models.py:894
+#: vespawatch/models.py:895
 msgid "Get email notifications for new nests"
 msgstr "Recevez une notification par e-mail pour les nouveaux nids."
 
