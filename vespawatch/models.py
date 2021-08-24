@@ -861,6 +861,7 @@ class ManagementAction(models.Model):
     product = models.CharField(verbose_name=_("Product"), max_length=3, choices=PRODUCT_CHOICES, default=PRODUCT_UNKNOWN)
     method = models.CharField(verbose_name=_('Method'), max_length=3, choices=METHOD_CHOICES, blank=True)
     result = models.CharField(verbose_name=_('Result'), max_length=3, choices=RESULT_CHOICES, default=RESULT_UNKNOWN)
+    nest_reported_before = models.BooleanField(verbose_name=_('This nest been reported before'), blank=True, null=True)
 
     @property
     def duration_in_seconds(self):

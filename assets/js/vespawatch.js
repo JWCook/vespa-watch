@@ -570,6 +570,7 @@ var VwManagementActionModal = {
             actionProblems: [],
             method: null,
             result: null,
+            nestReportedBefore: null,
 
             // Other
             errors: [], // validation
@@ -611,6 +612,15 @@ var VwManagementActionModal = {
         },
         modalTitle: function () {
             return this.mode === 'add' ? gettext('New management action') : gettext('Edit management action')
+        },
+        yesLabel: function () {
+            return gettext('Yes')
+        },
+        noLabel: function () {
+            return gettext('No')
+        },
+        nestReportedBeforeLabel: function () {
+            return gettext('This nest has been reported before')
         },
         resultLabel: function () {
             return gettext('Result')
@@ -690,6 +700,7 @@ var VwManagementActionModal = {
                     this.product = response.data.product;
                     this.method = response.data.method;
                     this.result = response.data.result;
+                    this.nestReportedBefore = response.data.nest_reported_before;
                 })
         },
         deleteAction: function () {
@@ -720,6 +731,7 @@ var VwManagementActionModal = {
             params.append('product', this.product);
             params.append('method', this.method);
             params.append('result', this.result);
+            params.append('nest_reported_before', this.nestReportedBefore);
 
             if (this.mode === 'edit') {
                 // We give the actionId to the server so it can perform an update
@@ -878,6 +890,14 @@ var VwManagementActionModal = {
                         <label for="method">{{ methodLabel }}</label>
                         <select v-model="method" class="form-control" id="method">
                             <option :value="method.value" v-for="method in availableMethodsOptional">{{ method.label }}</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="nestReportedBefore">{{ nestReportedBeforeLabel }}</label>
+                        <select v-model="nestReportedBefore" class="form-control" id="nestReportedBefore">
+                            <option :value="null">-----</option>
+                            <option :value="true">{{ yesLabel }}</option>
+                            <option :value="false">{{ noLabel }}</option>
                         </select>
                     </div>
               </div>        

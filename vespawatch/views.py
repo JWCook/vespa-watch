@@ -343,7 +343,8 @@ def get_management_action(request):
                              'problems': [problem.pk for problem in action.problems.all()],
                              'product': action.product,
                              'method': _string_val_or_none(action.method),
-                             'result': action.result
+                             'result': action.result,
+                             'nest_reported_before': action.nest_reported_before
                              },)
 
 
