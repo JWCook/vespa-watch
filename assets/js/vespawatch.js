@@ -667,6 +667,7 @@ var VwManagementActionModal = {
             return [{label: '-----', value: null}].concat(options);
         },
         populateFromServer: function () {
+            console.log("in populatefromserver()");
             axios.get(this.loadActionUrl, {params: {'action_id': this.actionId}})
                 .then(response => {
                     this.actionTime = response.data.action_time;
