@@ -26,6 +26,7 @@ def js_config_object(context):
             'actionProblemsUrl': reverse('vespawatch:api_action_problems'),
             'actionProductsUrl': reverse('vespawatch:api_action_products'),
             'actionMethodsUrl': reverse('vespawatch:api_action_methods'),
+            'actionResultsUrl': reverse('vespawatch:api_action_results'),
             'actionSaveUrl': reverse('vespawatch:api_action_save'),
             'actionLoadUrl': reverse('vespawatch:api_action_get'),
             'actionDeleteUrl': reverse('vespawatch:api_action_delete'),

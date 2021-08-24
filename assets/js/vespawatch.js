@@ -541,6 +541,7 @@ var VwManagementActionModal = {
             actionProblemsUrl: VWConfig.apis.actionProblemsUrl,
             actionProductsUrl: VWConfig.apis.actionProductsUrl,
             actionMethodsUrl: VWConfig.apis.actionMethodsUrl,
+            actionResultsUrl: VWConfig.apis.actionResultsUrl,
             saveActionUrl: VWConfig.apis.actionSaveUrl,
             loadActionUrl: VWConfig.apis.actionLoadUrl,
             deleteActionUrl: VWConfig.apis.actionDeleteUrl,
@@ -553,6 +554,7 @@ var VwManagementActionModal = {
             availableProblems: [],
             availableProducts: [],
             availableMethods: [],
+            availableResults: [],
 
             // Action details
             actionTime: '',  // As ISO3166
@@ -567,6 +569,7 @@ var VwManagementActionModal = {
             aftercare: null,
             actionProblems: [],
             method: null,
+            result: null,
 
             // Other
             errors: [], // validation
@@ -608,6 +611,9 @@ var VwManagementActionModal = {
         },
         modalTitle: function () {
             return this.mode === 'add' ? gettext('New management action') : gettext('Edit management action')
+        },
+        resultLabel: function () {
+            return gettext('Result')
         },
         problemsLabel: function () {
             return gettext('Problems')
@@ -683,6 +689,7 @@ var VwManagementActionModal = {
                     this.actionProblems = response.data.problems;
                     this.product = response.data.product;
                     this.method = response.data.method;
+                    this.result = response.data.result;
                 })
         },
         deleteAction: function () {
@@ -712,6 +719,7 @@ var VwManagementActionModal = {
             this.actionProblems.forEach(problem => params.append('problems', problem));
             params.append('product', this.product);
             params.append('method', this.method);
+            params.append('result', this.result);
 
             if (this.mode === 'edit') {
                 // We give the actionId to the server so it can perform an update
@@ -744,6 +752,7 @@ var VwManagementActionModal = {
             axios.get(this.actionProblemsUrl),
             axios.get(this.actionProductsUrl),
             axios.get(this.actionMethodsUrl),
+            axios.get(this.actionResultsUrl),
         ]).then(function (values) {
             vm.availableOldOutcomes = values[0].data;
             vm.availableNestSites = values[1].data;
@@ -752,6 +761,7 @@ var VwManagementActionModal = {
             vm.availableProblems = values[4].data;
             vm.availableProducts = values[5].data;
             vm.availableMethods = values[6].data;
+            vm.availableResults = values[7].data;
 
             // When everything is populated, it's time to load the action details (if we are editing an existing action)
             if (vm.mode === 'edit') {
@@ -806,6 +816,12 @@ var VwManagementActionModal = {
               <div class="form-group">
                 <label for="number_of_persons">{{ nrPersonsLabel }}*</label>
                 <input v-model="nrPersons" class="form-control" type="number" id="number_of_persons">
+              </div>
+              <div class="form-group">
+                <label for="result">{{ resultLabel }}*</label>
+                <select v-model="result" class="form-control" id="result">
+                  <option :value="result.value" v-for="result in availableResults">{{ result.label }}</option>
+                </select>
               </div>
               <div class="form-group">
                 <label for="oldOutcome">{{ oldOutcomeLabel }}*</label>
@@ -963,6 +979,12 @@ var VwManagementTableNestRow = {
         'vw-management-action-modal': VwManagementActionModal,
     },
     computed: {
+        resultLabel: function () {
+            return gettext('Result');
+        },
+        oldOutcomeLabel: function () {
+            return gettext('Outcome (old)');
+        },
         cannotEditLabel: function () {
             return gettext('You cannot edit this observation');
         },
@@ -1001,7 +1023,10 @@ var VwManagementTableNestRow = {
         <a :href="nest.detailsUrl" target="_blank">{{ detailsStr }}</a>
       </td>
       <td>
-        {{ nest.action }}
+        <div v-if="nest.actionFinished">
+            {{ oldOutcomeLabel }}: {{ nest.action }}<br>{{ resultLabel }}: {{ nest.actionResult }}
+        </div>
+        
         <vw-management-action-edit-buttons :nest-id="nest.id" :action-id="nest.actionId" v-on:data-changed="dataChanged" :editable="nest.editable"></vw-management-action-edit-buttons>
       </td>
     </tr>

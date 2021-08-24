@@ -604,6 +604,7 @@ class Nest(AbstractObservation):
             'municipality': self.municipality,
             'comments': self.comments,
             'action': self.managementaction.get_old_outcome_display() if self.controlled else '',
+            'actionResult': self.managementaction.get_result_display() if self.controlled else '',
             'actionCode': self.managementaction.old_outcome if self.controlled else '',
             'actionId': self.managementaction.pk if self.controlled else '',
             'actionFinished': self.controlled,
@@ -832,6 +833,18 @@ class ManagementAction(models.Model):
         (METHOD_UNKNOWN, _('Unknown'))
     )
 
+    RESULT_SUCCESSFULLY_TREATED = 'ST'
+    RESULT_UNSUCCESSFULLY_TREATED = 'UT'
+    RESULT_UNTREATED = 'UN'
+    RESULT_UNKNOWN = 'UK'
+
+    RESULT_CHOICES = (
+        (RESULT_SUCCESSFULLY_TREATED, _('Successfully treated')),
+        (RESULT_UNSUCCESSFULLY_TREATED, _('Unsuccessfully treated')),
+        (RESULT_UNTREATED, _('Untreated')),
+        (RESULT_UNKNOWN, _('Unknown'))
+    )
+
     nest = models.OneToOneField(Nest, on_delete=models.CASCADE, primary_key=True)
     user = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
     old_outcome = models.CharField(verbose_name=_("Outcome (old)"), max_length=2, choices=OLD_OUTCOME_CHOICE)
@@ -847,6 +860,7 @@ class ManagementAction(models.Model):
     problems = models.ManyToManyField(ManagementActionProblem, blank=True)
     product = models.CharField(verbose_name=_("Product"), max_length=3, choices=PRODUCT_CHOICES, default=PRODUCT_UNKNOWN)
     method = models.CharField(verbose_name=_('Method'), max_length=3, choices=METHOD_CHOICES, blank=True)
+    result = models.CharField(verbose_name=_('Result'), max_length=3, choices=RESULT_CHOICES, default=RESULT_UNKNOWN)
 
     @property
     def duration_in_seconds(self):

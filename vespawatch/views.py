@@ -264,6 +264,10 @@ def management_actions_problems_json(request):
     return JsonResponse([{'value': problem.pk, 'label': problem.description} for problem in problems], safe=False)
 
 
+def management_actions_results_json(request):
+    return _choices_to_json(ManagementAction.RESULT_CHOICES)
+
+
 def management_actions_products_json(request):
     return _choices_to_json(ManagementAction.PRODUCT_CHOICES)
 
@@ -338,7 +342,9 @@ def get_management_action(request):
                              'aftercare': _string_val_or_none(action.aftercare),
                              'problems': [problem.pk for problem in action.problems.all()],
                              'product': action.product,
-                             'method': _string_val_or_none(action.method)})
+                             'method': _string_val_or_none(action.method),
+                             'result': action.result
+                             },)
 
 
 def get_nest_picture(request, pk=None):
