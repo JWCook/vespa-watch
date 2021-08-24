@@ -533,6 +533,7 @@ var VwObservationsViz = {
 var VwManagementActionModal = {
     data: function () {
         return {
+            // API endpoints URLs
             actionOutcomesUrl: VWConfig.apis.actionOutcomesUrl,
             actionNestSitesUrl: VWConfig.apis.actionNestSitesUrl,
             actionNestTypesUrl: VWConfig.apis.actionNestTypesUrl,
@@ -544,6 +545,7 @@ var VwManagementActionModal = {
             loadActionUrl: VWConfig.apis.actionLoadUrl,
             deleteActionUrl: VWConfig.apis.actionDeleteUrl,
 
+            // Available options (selects and checkboxes)
             availableOutcomes: [],
             availableNestSites: [],
             availableNestTypes: [],
@@ -552,8 +554,7 @@ var VwManagementActionModal = {
             availableProducts: [],
             availableMethods: [],
 
-            errors: [],
-
+            // Action details
             actionTime: '',  // As ISO3166
             comments: '',
             nrPersons: '', // number
@@ -561,13 +562,14 @@ var VwManagementActionModal = {
             personName: '',
             duration: '',  // In seconds
             product: null,
-
             nestSite: null,
             nestType: null,
             aftercare: null,
             actionProblems: [],
             method: null,
 
+            // Other
+            errors: [], // validation
             deleteConfirmation: false,  // The user has asked to delete, we're asking confirmation (instead of the usual form)
             showAdvancedFields: false
         }
@@ -666,7 +668,7 @@ var VwManagementActionModal = {
         prependNullOption: function (options) {
             return [{label: '-----', value: null}].concat(options);
         },
-        populateActionFromServer: function () {
+        loadActionFromServer: function () {
             axios.get(this.loadActionUrl, {params: {'action_id': this.actionId}})
                 .then(response => {
                     this.actionTime = response.data.action_time;
@@ -695,7 +697,7 @@ var VwManagementActionModal = {
                     console.log('Error');
                 });
         },
-        save: function () {
+        saveActionToServer: function () {
             const params = new URLSearchParams();
             params.append('nest', this.nestId);
             params.append('action_time', this.actionTime);
@@ -753,7 +755,7 @@ var VwManagementActionModal = {
 
             // When everything is populated, it's time to load the action details (if we are editing an existing action)
             if (vm.mode === 'edit') {
-                vm.populateActionFromServer()
+                vm.loadActionFromServer()
             }
         })
     },
@@ -866,7 +868,7 @@ var VwManagementActionModal = {
             </form>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-success" @click="save()">{{ saveLabel }}</button>
+            <button type="button" class="btn btn-success" @click="saveActionToServer()">{{ saveLabel }}</button>
             <button type="button" class="btn btn-light" @click="$emit('close')">{{ cancelLabel }}</button>
             <button v-if="mode === 'edit'" type="button" @click="deleteConfirmation=true" class="btn btn-danger">{{ deleteLabel }}</button>
           </div>
