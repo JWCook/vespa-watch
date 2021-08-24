@@ -535,8 +535,8 @@ var VwManagementActionModal = {
         return {
             actionOutcomesUrl: VWConfig.apis.actionOutcomesUrl,
             actionNestSitesUrl: VWConfig.apis.actionNestSitesUrl,
-            actionsNestTypesUrl: VWConfig.apis.actionNestTypesUrl,
-            actionsAftercareUrl: VWConfig.apis.actionAftercareUrl,
+            actionNestTypesUrl: VWConfig.apis.actionNestTypesUrl,
+            actionAftercareUrl: VWConfig.apis.actionAftercareUrl,
             actionProblemsUrl: VWConfig.apis.actionProblemsUrl,
             actionProductsUrl: VWConfig.apis.actionProductsUrl,
             actionMethodsUrl: VWConfig.apis.actionMethodsUrl,
@@ -610,7 +610,7 @@ var VwManagementActionModal = {
         problemsLabel: function () {
             return gettext('Problems')
         },
-        productLabel: function() {
+        productLabel: function () {
             return gettext('Product')
         },
         saveLabel: function () {
@@ -666,8 +666,7 @@ var VwManagementActionModal = {
         prependNullOption: function (options) {
             return [{label: '-----', value: null}].concat(options);
         },
-        populateFromServer: function () {
-            console.log("in populatefromserver()");
+        populateActionFromServer: function () {
             axios.get(this.loadActionUrl, {params: {'action_id': this.actionId}})
                 .then(response => {
                     this.actionTime = response.data.action_time;
@@ -730,110 +729,33 @@ var VwManagementActionModal = {
                     vm.errors = error.response.data.errors;
                 });
         },
-        loadOutcomes: function () {
-            return axios.get(this.actionOutcomesUrl)
-                .then(response => {
-                    this.availableOutcomes = response.data;
-                })
-                .catch(function (error) {
-                    console.log(error);
-                });
-        },
-        loadNestSites: function () {
-            return axios.get(this.actionNestSitesUrl)
-                .then(response => {
-                    this.availableNestSites = response.data;
-                })
-                .catch(function (error) {
-                    console.log(error);
-                });
-        },
-        loadNestTypes: function () {
-            return axios.get(this.actionsNestTypesUrl)
-                .then(response => {
-                    this.availableNestTypes = response.data;
-                })
-                .catch(function (error) {
-                    console.log(error);
-                });
-        },
-        loadAftercare: function () {
-            return axios.get(this.actionsAftercareUrl)
-                .then(response => {
-                    this.availableAftercare = response.data;
-                })
-                .catch(function (error) {
-                    console.log(error);
-                });
-        },
-        loadAvailableProblems: function () {
-            return axios.get(this.actionProblemsUrl)
-                .then(response => {
-                    this.availableProblems = response.data;
-                })
-                .catch(function (error) {
-                    console.log(error);
-                });
-        },
-        loadAvailableProducts: function () {
-            return axios.get(this.actionProductsUrl)
-                .then(response => {
-                    this.availableProducts = response.data;
-                })
-                .catch(function (error) {
-                    console.log(error);
-                });
-        },
-        loadAvailableMethods: function () {
-            return axios.get(this.actionMethodsUrl)
-                .then(response => {
-                    this.availableMethods = response.data;
-                })
-                .catch(function (error) {
-                    console.log(error);
-                });
-        }
     },
     mounted: function () {
-        // We load the "outcomes" list, and we're in edit mode, we populate the form from the server
-        this.loadOutcomes().then(() => {
-            if (this.mode === 'edit') {
-                this.populateFromServer()
-            }
-        });
+        var vm = this;
 
-        this.loadNestSites().then(() => {
-            if (this.mode === 'edit') {
-                this.populateFromServer()
-            }
-        });
+        // We populate the various selects and checkboxes
+        Promise.all([
+            axios.get(this.actionOutcomesUrl),
+            axios.get(this.actionNestSitesUrl),
+            axios.get(this.actionNestTypesUrl),
+            axios.get(this.actionAftercareUrl),
+            axios.get(this.actionProblemsUrl),
+            axios.get(this.actionProductsUrl),
+            axios.get(this.actionMethodsUrl),
+        ]).then(function (values) {
+            vm.availableOutcomes = values[0].data;
+            vm.availableNestSites = values[1].data;
+            vm.availableNestTypes = values[2].data;
+            vm.availableAftercare = values[3].data;
+            vm.availableProblems = values[4].data;
+            vm.availableProducts = values[5].data;
+            vm.availableMethods = values[6].data;
 
-        this.loadNestTypes().then(() => {
-            if (this.mode === 'edit') {
-                this.populateFromServer()
+            // When everything is populated, it's time to load the action details (if we are editing an existing action)
+            if (vm.mode === 'edit') {
+                vm.populateActionFromServer()
             }
-        });
-
-        this.loadAftercare().then(() => {
-            if (this.mode === 'edit') {
-                this.populateFromServer()
-            }
-        });
-        this.loadAvailableProblems().then(() => {
-            if (this.mode === 'edit') {
-                this.populateFromServer()
-            }
-        });
-        this.loadAvailableProducts().then(() => {
-            if (this.mode === 'edit') {
-                this.populateFromServer()
-            }
-        });
-        this.loadAvailableMethods().then(() => {
-            if (this.mode === 'edit') {
-                this.populateFromServer()
-            }
-        });
+        })
     },
 
     template: `
@@ -1487,7 +1409,7 @@ var VwLocationSelectorMap = {
             if (this.marker != undefined) {
                 this.map.removeLayer(this.marker);
             }
-             // Only one!
+            // Only one!
 
             // Create the marker
             this.marker = L.marker([lng, lat], {
