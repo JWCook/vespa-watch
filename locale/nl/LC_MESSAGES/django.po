@@ -288,7 +288,7 @@ msgstr "Afsluitbaar potje/doos"
 
 #: vespawatch/models.py:811
 msgid "Liquid sprayer"
-msgstr "Vloistof verstruiver"
+msgstr "Vloeistof verstuiver"
 
 #: vespawatch/models.py:812
 msgid "Powder distributor"
