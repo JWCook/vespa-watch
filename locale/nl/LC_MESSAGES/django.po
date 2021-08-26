@@ -200,7 +200,7 @@ msgstr "Buiten, onbedekt op gebouw"
 
 #: vespawatch/models.py:741
 msgid "Outside, not covered in tree or bush"
-msgstr "Buiten, onbedekt op boom of struik"
+msgstr "Buiten, onbedekt in boom of struik"
 
 #: vespawatch/models.py:742
 msgid "Outside, covered by construction"
@@ -248,7 +248,7 @@ msgstr "Permas-D"
 
 #: vespawatch/models.py:787
 msgid "Liquid nitrogen"
-msgstr "Vloiebare stikstof"
+msgstr "Vloeibare stikstof"
 
 #: vespawatch/models.py:788
 msgid "Vespa"
@@ -344,7 +344,7 @@ msgstr "Product"
 
 #: vespawatch/models.py:843
 msgid "Method"
-msgstr "Method"
+msgstr "Methode"
 
 #: vespawatch/models.py:844
 msgid "Result"

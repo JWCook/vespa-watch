@@ -137,7 +137,7 @@ msgstr "Nazorg"
 
 #: assets/js/vespawatch.js:669 vespawatch/static/vespawatch/js/app.min.js:1
 msgid "Method"
-msgstr "Method"
+msgstr "Methode"
 
 #: assets/js/vespawatch.js:672 vespawatch/static/vespawatch/js/app.min.js:1
 msgid "Reported by"
