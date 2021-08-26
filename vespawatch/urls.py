@@ -41,7 +41,6 @@ urlpatterns = [
     path('api/nest_pictures/', views.save_nest_picture, name='api_nest_picture'),
     path('api/nest_pictures/<int:pk>', views.get_nest_picture, name='api_single_nest_picture'),
 
-    path('api/action_old_outcomes/', views.management_actions_old_outcomes_json, name='api_action_old_outcomes'),
     path('api/action_nest_sites', views.management_actions_nest_sites_json, name='api_action_nest_sites'),
     path('api/action_nest_types', views.management_actions_nest_types_json, name='api_action_nest_types'),
     path('api/action_aftercare', views.management_actions_aftercare_json, name='api_action_aftercare'),

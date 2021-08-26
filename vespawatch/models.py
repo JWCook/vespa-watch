@@ -603,9 +603,7 @@ class Nest(AbstractObservation):
             'observation_time': self.observation_time.timestamp() * 1000,
             'municipality': self.municipality,
             'comments': self.comments,
-            'action': self.managementaction.get_old_outcome_display() if self.controlled else '',
             'actionResult': self.managementaction.get_result_display() if self.controlled else '',
-            'actionCode': self.managementaction.old_outcome if self.controlled else '',
             'actionId': self.managementaction.pk if self.controlled else '',
             'actionFinished': self.controlled,
             'originates_in_vespawatch': self.  originates_in_vespawatch,
@@ -731,22 +729,6 @@ class ManagementActionProblem(models.Model):
 
 
 class ManagementAction(models.Model):
-    PERMAS_D_PROF = 'PP'
-    PERMAS_D_CLASSIC = 'PC'
-    REMOVAL_COMPLETE = 'FD'  # previously "full destruction": possible cleanup: create a data migration so FD -> RC?
-    REMOVAL_PARTIAL = 'PD'   # previously "partial destruction": possible cleanup: create a data migration so PD -> RP?
-    NOT_TREATED = 'ND'  # previously "nothing done": : possible cleanup: create a data migration so ND -> NT?
-    UNKNOWN = 'UK'
-
-    OLD_OUTCOME_CHOICE = (
-        (PERMAS_D_PROF, _('Professional permas-D treatment')),
-        (PERMAS_D_CLASSIC, _('Classic permas-D treatment')),
-        (REMOVAL_COMPLETE, _('Complete manual removal')),
-        (REMOVAL_PARTIAL, _('Partial manual removal')),
-        (NOT_TREATED, _('Not treated')),
-        (UNKNOWN, _('Unknown')),
-    )
-
     SITE_OUTSIDE_NOT_COVERED_BUILDING = 'O_NC_B'
     SITE_OUTSIDE_NOT_COVERED_TREE = 'O_NC_T'
     SITE_OUTSIDE_COVERED_CONSTRUCTION = 'O_C_C'
@@ -847,7 +829,6 @@ class ManagementAction(models.Model):
 
     nest = models.OneToOneField(Nest, on_delete=models.CASCADE, primary_key=True)
     user = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
-    old_outcome = models.CharField(verbose_name=_("Outcome (old)"), max_length=2, choices=OLD_OUTCOME_CHOICE)
     action_time = models.DateTimeField(verbose_name=_("Date and time nest removal"))
     person_name = models.CharField(verbose_name=_("Reported by"), max_length=255, blank=True)
     duration = models.DurationField(verbose_name=_("Time on site (in minutes)"), null=True, blank=True)
@@ -872,7 +853,7 @@ class ManagementAction(models.Model):
             return '' # NULL
 
     def __str__(self):
-        return f'{self.action_time.strftime("%Y-%m-%d")} {self.get_old_outcome_display()}'
+        return f'{self.action_time.strftime("%Y-%m-%d")} {self.get_result_display()}'
 
 
 class InatObsToDelete(models.Model):
