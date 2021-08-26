@@ -461,5 +461,14 @@ def csv_export_management_actions(request):
                                 'User': 'user',
                                 'Time on site (in minutes)': 'duration',
                                 'Number of people': 'number_of_persons',
-                                'Comments': 'comments'
+                                'Comments': 'comments',
+                                'Nest site': 'get_site_display',
+                                'Nest type': 'get_nest_type_display',
+                                'Aftercare': 'get_aftercare_display',
+                                'Problems': 'problems_string_list',
+                                'Product': 'get_product_display',
+                                'Method': 'get_method_display',
+                                'Result': 'get_result_display',
+                                'Nest reported before': 'nest_reported_before',
+                                'File number nest removal': 'file_number_nest_removal'
                             })

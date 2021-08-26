@@ -852,6 +852,9 @@ class ManagementAction(models.Model):
         except AttributeError:
             return '' # NULL
 
+    def problems_string_list(self):
+        return ', '. join([problem.description for problem in self.problems.all()])
+
     def __str__(self):
         return f'{self.action_time.strftime("%Y-%m-%d")} {self.get_result_display()}'
 
