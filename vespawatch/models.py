@@ -887,11 +887,11 @@ def get_observations(include_individuals=True, include_nests=True, limit=None):
     obs = []
 
     if include_individuals:
-        obs = obs + list(Individual.objects.select_related('taxon').prefetch_related('pictures').all().order_by('-observation_time')[:limit])
+        obs = obs + list(Individual.objects.select_related('taxon').prefetch_related('pictures').all().order_by('-created_at')[:limit])
     if include_nests:
-        obs = obs + list(Nest.objects.select_related('taxon').prefetch_related('pictures').all().order_by('-observation_time')[:limit])
+        obs = obs + list(Nest.objects.select_related('taxon').prefetch_related('pictures').all().order_by('-created_at')[:limit])
 
-    obs.sort(key=lambda x: x.observation_time, reverse=True)
+    obs.sort(key=lambda x: x.created_at, reverse=True)
 
     obs = obs[:limit]
 

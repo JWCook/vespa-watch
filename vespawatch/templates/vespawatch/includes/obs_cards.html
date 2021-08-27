@@ -22,7 +22,8 @@
           {% endif %}
         </div>
         <div class="card-footer text-muted">
-          <small>{{ obs.observation_time|naturalday }}</small>
+          <small> {% trans 'reported ' %}{{ obs.created_at|naturalday }} <br> </small>
+          <small> {% trans 'observed ' %}{{ obs.observation_time|naturalday }}  </small>
         </div>
       </div>
     </div>

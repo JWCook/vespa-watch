@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-26 10:27+0200\n"
+"POT-Creation-Date: 2021-08-27 10:02+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -49,7 +49,7 @@ msgstr "Hauteur du nid"
 msgid "Name"
 msgstr "Nom"
 
-#: vespawatch/forms.py:75 vespawatch/models.py:257 vespawatch/models.py:875
+#: vespawatch/forms.py:75 vespawatch/models.py:257 vespawatch/models.py:878
 #: vespawatch/templates/vespawatch/nest_detail.html:56
 msgid "Telephone number"
 msgstr "Téléphone"
@@ -70,7 +70,7 @@ msgstr "Photo pour identification"
 msgid "Order"
 msgstr "Ordre"
 
-#: vespawatch/models.py:101 vespawatch/models.py:724 vespawatch/models.py:871
+#: vespawatch/models.py:101 vespawatch/models.py:724 vespawatch/models.py:874
 #: vespawatch/templates/vespawatch/individual_create.html:76
 #: vespawatch/templates/vespawatch/nest_create.html:76
 #: vespawatch/templates/vespawatch/nest_detail.html:33
@@ -356,19 +356,19 @@ msgstr "Ce nid a déja été précédemment reporté"
 msgid "File number nest removal"
 msgstr "Numéro du dossier d'enlèvement"
 
-#: vespawatch/models.py:870
+#: vespawatch/models.py:873
 msgid "Organization / business"
 msgstr "Organisation / société"
 
-#: vespawatch/models.py:871
+#: vespawatch/models.py:874
 msgid "Describe the activities of your organization / business."
 msgstr "Décrivez les activitées menées par votre organisation ou société"
 
-#: vespawatch/models.py:873
+#: vespawatch/models.py:876
 msgid "Only numbers are allowed."
 msgstr "Nombres uniquement"
 
-#: vespawatch/models.py:877
+#: vespawatch/models.py:880
 msgid "Get email notifications for new nests"
 msgstr "Recevez une notification par e-mail pour les nouveaux nids."
 
@@ -525,9 +525,17 @@ msgstr "iNaturalist"
 msgid "To be synchronized"
 msgstr "Pas encore synchronisé"
 
+#: vespawatch/templates/vespawatch/includes/obs_cards.html:25
+msgid "reported "
+msgstr "signalé "
+
+#: vespawatch/templates/vespawatch/includes/obs_cards.html:26
+msgid "observed "
+msgstr "observé "
+
 #: vespawatch/templates/vespawatch/index.html:12
-msgid "Monitor the invasion of the Asian hornet"
-msgstr "Suivez l'invasion du frelon asiatique"
+msgid "Monitor the invasion of the Asian hornet in Flanders"
+msgstr "Suivez l'invasion du frelon asiatique en Flandre"
 
 #: vespawatch/templates/vespawatch/index.html:13
 msgid "Report a hornet"
