@@ -534,8 +534,6 @@ msgid "observed "
 msgstr "geobserveerd "
 
 #: vespawatch/templates/vespawatch/index.html:12
-#, fuzzy
-#| msgid "Monitor the invasion of the Asian hornet"
 msgid "Monitor the invasion of the Asian hornet in Flanders"
 msgstr "Help de Aziatische hoornaar in kaart te brengen in Vlaanderen"
 
