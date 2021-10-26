@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-27 10:02+0200\n"
+"POT-Creation-Date: 2021-10-26 15:02+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,10 +19,6 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Language: nl_BE\n"
 "X-Source-Language: en\n"
-
-#: src/django-imagekit/imagekit/admin.py:10
-msgid "Thumbnail"
-msgstr "Miniatuurafbeelding"
 
 #: vespawatch/fields.py:19
 msgid "Enter a valid date/time."
@@ -376,7 +372,7 @@ msgstr "Ontvang een email voor nieuwe nesten"
 
 #: vespawatch/templates/registration/login.html:9
 #: vespawatch/templates/registration/login.html:32
-#: vespawatch/templates/vespawatch/base.html:91
+#: vespawatch/templates/vespawatch/base.html:93
 msgid "Log in"
 msgstr "Inloggen"
 
@@ -405,50 +401,54 @@ msgstr "Vul je oude wachtwoord in, creëer een nieuw en bevestig."
 msgid "Cancel"
 msgstr "Annuleer"
 
-#: vespawatch/templates/vespawatch/base.html:59
-#: vespawatch/templates/vespawatch/base.html:72
+#: vespawatch/templates/vespawatch/base.html:60
+#: vespawatch/templates/vespawatch/base.html:73
 msgid "Management"
 msgstr "Bestrijding"
 
-#: vespawatch/templates/vespawatch/base.html:63
+#: vespawatch/templates/vespawatch/base.html:64
 msgid "Get involved"
 msgstr "Doe mee"
 
-#: vespawatch/templates/vespawatch/base.html:66
+#: vespawatch/templates/vespawatch/base.html:67
 msgid "Identification"
 msgstr "Herkenning"
 
-#: vespawatch/templates/vespawatch/base.html:69
+#: vespawatch/templates/vespawatch/base.html:70
 msgid "About"
 msgstr "Over deze website"
 
-#: vespawatch/templates/vespawatch/base.html:71
+#: vespawatch/templates/vespawatch/base.html:72
 msgid "Vespa velutina"
 msgstr "Vespa velutina"
 
-#: vespawatch/templates/vespawatch/base.html:73
+#: vespawatch/templates/vespawatch/base.html:74
 msgid "Project"
 msgstr "Project"
 
-#: vespawatch/templates/vespawatch/base.html:74
-#: vespawatch/templates/vespawatch/base.html:143
+#: vespawatch/templates/vespawatch/base.html:75
+msgid "Professional eradicators"
+msgstr "Professionele bestrijders"
+
+#: vespawatch/templates/vespawatch/base.html:76
+#: vespawatch/templates/vespawatch/base.html:145
 msgid "Privacy policy"
 msgstr "Privacybeleid"
 
-#: vespawatch/templates/vespawatch/base.html:75
+#: vespawatch/templates/vespawatch/base.html:77
 msgid "Links"
 msgstr "Linken"
 
-#: vespawatch/templates/vespawatch/base.html:85
+#: vespawatch/templates/vespawatch/base.html:87
 #: vespawatch/templates/vespawatch/profile.html:11
 msgid "My profile"
 msgstr "Mijn profiel"
 
-#: vespawatch/templates/vespawatch/base.html:86
+#: vespawatch/templates/vespawatch/base.html:88
 msgid "Log out"
 msgstr "Uitloggen"
 
-#: vespawatch/templates/vespawatch/base.html:132
+#: vespawatch/templates/vespawatch/base.html:134
 msgid ""
 "\n"
 "                This project was funded by <a href=\"https://www.ewi-"
@@ -472,15 +472,15 @@ msgstr ""
 "\">European Citizen Science Association (ECSA)</a>.\n"
 "              "
 
-#: vespawatch/templates/vespawatch/base.html:142
+#: vespawatch/templates/vespawatch/base.html:144
 msgid "About this project"
 msgstr "Over dit project"
 
-#: vespawatch/templates/vespawatch/base.html:144
+#: vespawatch/templates/vespawatch/base.html:146
 msgid "Contact us"
 msgstr "Contacteer ons"
 
-#: vespawatch/templates/vespawatch/base.html:145
+#: vespawatch/templates/vespawatch/base.html:147
 msgid "Source code"
 msgstr "Broncode"
 
@@ -695,17 +695,17 @@ msgstr ""
 msgid "Save"
 msgstr "Bewaar"
 
-#: vespawatch/views.py:92 vespawatch/views.py:119
+#: vespawatch/views.py:94 vespawatch/views.py:121
 msgid ""
 "Your observation was successfully created. Thanks for your contribution!"
 msgstr "Je observatie werd bewaard. Bedankt voor je bijdrage!"
 
-#: vespawatch/views.py:147
+#: vespawatch/views.py:149
 msgid "Your profile was successfully updated."
 msgstr "Je profiel is gewijzigd."
 
-#~ msgid "Professional permas-D treatment"
-#~ msgstr "Professionele Permas-D behandeling"
+#~ msgid "Thumbnail"
+#~ msgstr "Miniatuurafbeelding"
 
 #~ msgid "Classic permas-D treatment"
 #~ msgstr "Gewone Permas-D behandeling"

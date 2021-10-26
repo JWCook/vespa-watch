@@ -16,6 +16,7 @@ urlpatterns = [
     path('about/privacy-policy/', views.about_privacypolicy, name='about_privacypolicy'),
     path('about/project/', views.about_project, name='about_project'),
     path('about/vespa-velutina/', views.about_vespavelutina, name='about_vespavelutina'),
+    path('about/professional-eradicators/', views.about_professionaleradicators, name='about_professionaleradicators'),
 
     path('management/', views.management, name='management'),
     path('management/nest/<int:pk>/', views.nest_detail, name='nest-detail'),
