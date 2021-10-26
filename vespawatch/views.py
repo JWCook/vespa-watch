@@ -74,6 +74,8 @@ def about_project(request):
 def about_vespavelutina(request):
     return render(request, 'vespawatch/simple_page_fragment.html', {'fragment_id': 'about_vespavelutina'})
 
+def about_professionaleradicators(request):
+    return render(request, 'vespawatch/simple_page_fragment.html', {'fragment_id': 'about_professionaleradicators'})
 
 def latest_observations(request):
     return render(request, 'vespawatch/obs.html', {'observations': get_observations(limit=40)})

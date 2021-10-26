@@ -48,6 +48,7 @@
         {% url 'vespawatch:identification' as identification_url %}
         {% url 'vespawatch:about_vespavelutina' as about_vespavelutina_url %}
         {% url 'vespawatch:about_management' as about_management_url %}
+        {% url 'vespawatch:about_professionaleradicators' as about_professionaleradicators_url %}
         {% url 'vespawatch:about_project' as about_project_url %}
         {% url 'vespawatch:about_privacypolicy' as about_privacypolicy_url %}
         {% url 'vespawatch:about_links' as about_links_url %}
@@ -71,6 +72,7 @@
                 <a class="dropdown-item{% if request.path == about_vespavelutina_url %} active{% endif %}" href="{{ about_vespavelutina_url }}">{% trans 'Vespa velutina' %}</a>
                 <a class="dropdown-item{% if request.path == about_management_url %} active{% endif %}" href="{{ about_management_url }}">{% trans 'Management' %}</a>
                 <a class="dropdown-item{% if request.path == about_project_url %} active{% endif %}" href="{{ about_project_url }}">{% trans 'Project' %}</a>
+                <a class="dropdown-item{% if request.path == about_professionaleradicators_url %} active{% endif %}" href="{{ about_professionaleradicators_url }}">{% trans 'Professional eradicators' %}</a>
                 <a class="dropdown-item{% if request.path == about_privacypolicy_url %} active{% endif %}" href="{{ about_privacypolicy_url }}">{% trans 'Privacy policy' %}</a>
                 <a class="dropdown-item{% if request.path == about_links_url %} active{% endif %}" href="{{ about_links_url }}">{% trans 'Links' %}</a>
               </div>

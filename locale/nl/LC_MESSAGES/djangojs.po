@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-27 10:02+0200\n"
+"POT-Creation-Date: 2021-10-26 15:03+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -58,32 +58,31 @@ msgstr "Nieuwe bestrijdingsactie"
 msgid "Edit management action"
 msgstr "Pas bestrijdingsactie aan"
 
-#: assets/js/vespawatch.js:615 vespawatch/static/vespawatch/js/app.min.js:1
+#: assets/js/vespawatch.js:615
 msgid "File number nest removal"
 msgstr "Dossiernummer verdelging"
 
-#: assets/js/vespawatch.js:618 vespawatch/static/vespawatch/js/app.min.js:1
+#: assets/js/vespawatch.js:618
 msgid "Yes"
 msgstr "Ja"
 
-#: assets/js/vespawatch.js:621 vespawatch/static/vespawatch/js/app.min.js:1
+#: assets/js/vespawatch.js:621
 msgid "No"
 msgstr "Nee"
 
-#: assets/js/vespawatch.js:624 vespawatch/static/vespawatch/js/app.min.js:1
+#: assets/js/vespawatch.js:624
 msgid "This nest has been reported before"
 msgstr "Is dit nest al eerder gerapporteerd?"
 
 #: assets/js/vespawatch.js:627 assets/js/vespawatch.js:997
-#: vespawatch/static/vespawatch/js/app.min.js:1
 msgid "Result"
 msgstr "Resultaat"
 
-#: assets/js/vespawatch.js:630 vespawatch/static/vespawatch/js/app.min.js:1
+#: assets/js/vespawatch.js:630
 msgid "Problems"
 msgstr "Problemen"
 
-#: assets/js/vespawatch.js:633 vespawatch/static/vespawatch/js/app.min.js:1
+#: assets/js/vespawatch.js:633
 msgid "Product"
 msgstr "Product"
 
@@ -95,8 +94,7 @@ msgstr "Opslaan"
 msgid "Cancel"
 msgstr "Annuleer"
 
-#: assets/js/vespawatch.js:642 assets/js/vespawatch.js:1214
-#: vespawatch/static/vespawatch/js/app.min.js:1
+#: assets/js/vespawatch.js:642 vespawatch/static/vespawatch/js/app.min.js:1
 msgid "Comments"
 msgstr "Opmerkingen"
 
@@ -108,8 +106,7 @@ msgstr "Verwijder"
 msgid "Yes, delete"
 msgstr "Ja, verwijder"
 
-#: assets/js/vespawatch.js:651 assets/js/vespawatch.js:1211
-#: vespawatch/static/vespawatch/js/app.min.js:1
+#: assets/js/vespawatch.js:651 vespawatch/static/vespawatch/js/app.min.js:1
 msgid "Date and time nest removal"
 msgstr "Datum en tijd bestrijding"
 
@@ -123,19 +120,19 @@ msgstr "Tijd ter plaatse (in minuten)"
 msgid "Number of persons"
 msgstr "Aantal personen"
 
-#: assets/js/vespawatch.js:660 vespawatch/static/vespawatch/js/app.min.js:1
+#: assets/js/vespawatch.js:660
 msgid "Nest site"
 msgstr "Nest plaats"
 
-#: assets/js/vespawatch.js:663 vespawatch/static/vespawatch/js/app.min.js:1
+#: assets/js/vespawatch.js:663
 msgid "Nest type"
 msgstr "Nest type"
 
-#: assets/js/vespawatch.js:666 vespawatch/static/vespawatch/js/app.min.js:1
+#: assets/js/vespawatch.js:666
 msgid "Aftercare"
 msgstr "Nazorg"
 
-#: assets/js/vespawatch.js:669 vespawatch/static/vespawatch/js/app.min.js:1
+#: assets/js/vespawatch.js:669
 msgid "Method"
 msgstr "Methode"
 
@@ -191,8 +188,7 @@ msgstr "Bestreden nesten"
 msgid "iNaturalist"
 msgstr "iNaturalist"
 
-#: assets/js/vespawatch.js:1070 assets/js/vespawatch.js:1363
-#: vespawatch/static/vespawatch/js/app.min.js:1
+#: assets/js/vespawatch.js:1070 vespawatch/static/vespawatch/js/app.min.js:1
 msgid "Date"
 msgstr "Datum"
 
@@ -200,8 +196,7 @@ msgstr "Datum"
 msgid "Filter"
 msgstr "Filter"
 
-#: assets/js/vespawatch.js:1087 assets/js/vespawatch.js:1372
-#: vespawatch/static/vespawatch/js/app.min.js:1
+#: assets/js/vespawatch.js:1087 vespawatch/static/vespawatch/js/app.min.js:1
 msgid "Loading..."
 msgstr "Laden..."
 
@@ -229,10 +224,6 @@ msgstr "Vorige"
 msgid "Unmanaged nests"
 msgstr "Onbestreden nesten"
 
-#: assets/js/vespawatch.js:1208 vespawatch/static/vespawatch/js/app.min.js:1
-msgid "Management action"
-msgstr "Bestrijdingsactie"
-
 #: assets/js/vespawatch.js:1244 vespawatch/static/vespawatch/js/app.min.js:1
 msgid "Person name"
 msgstr "Naam van de persoon"
@@ -240,18 +231,6 @@ msgstr "Naam van de persoon"
 #: assets/js/vespawatch.js:1247 vespawatch/static/vespawatch/js/app.min.js:1
 msgid "No action"
 msgstr "Geen actie"
-
-#: assets/js/vespawatch.js:1366 vespawatch/static/vespawatch/js/app.min.js:1
-msgid "Address"
-msgstr "Adres"
-
-#: assets/js/vespawatch.js:1369 vespawatch/static/vespawatch/js/app.min.js:1
-msgid "Recent observations"
-msgstr "Recente observaties"
-
-#: assets/js/vespawatch.js:1375 vespawatch/static/vespawatch/js/app.min.js:1
-msgid "Subject"
-msgstr "Onderwerp"
 
 #: assets/js/vespawatch.js:1495 vespawatch/static/vespawatch/js/app.min.js:1
 msgid "Search"
@@ -274,18 +253,6 @@ msgstr "Dit veld is verplicht."
 msgid "Type a location name and click search..."
 msgstr "Typ een plaatsnaam en klik zoek..."
 
-#: assets/js/vespawatch.js:1581 vespawatch/static/vespawatch/js/app.min.js:1
-msgid "Latitude"
-msgstr "Latitude"
-
-#: assets/js/vespawatch.js:1584 vespawatch/static/vespawatch/js/app.min.js:1
-msgid "Longitude"
-msgstr "Longitude"
-
-#: assets/js/vespawatch.js:1613 vespawatch/static/vespawatch/js/app.min.js:1
-msgid "Observation date"
-msgstr "Datum van observatie"
-
 #: assets/js/vespawatch.js:1664 vespawatch/static/vespawatch/js/app.min.js:1
 msgid "Drop up to 3 photos here to upload"
 msgstr "Sleep tot 3 foto's hierheen om ze op te laden"
@@ -306,11 +273,41 @@ msgstr ""
 msgid "<div>"
 msgstr ""
 
+#: vespawatch/static/vespawatch/js/app.min.js:1
+msgid "Outcome"
+msgstr "Resultaat"
+
+#: vespawatch/static/vespawatch/js/app.min.js:1
+msgid "Management action"
+msgstr "Bestrijdingsactie"
+
+#: vespawatch/static/vespawatch/js/app.min.js:1
+msgid "Address"
+msgstr "Adres"
+
+#: vespawatch/static/vespawatch/js/app.min.js:1
+msgid "Recent observations"
+msgstr "Recente observaties"
+
+#: vespawatch/static/vespawatch/js/app.min.js:1
+msgid "Subject"
+msgstr "Onderwerp"
+
+#: vespawatch/static/vespawatch/js/app.min.js:1
+msgid "Latitude"
+msgstr "Latitude"
+
+#: vespawatch/static/vespawatch/js/app.min.js:1
+msgid "Longitude"
+msgstr "Longitude"
+
+#: vespawatch/static/vespawatch/js/app.min.js:1
+msgid "Observation date"
+msgstr "Datum van observatie"
+
+#: vespawatch/static/vespawatch/libraries/moment/moment.min.js:1
+msgid ": "
+msgstr ": "
+
 #~ msgid "Outcome (old)"
 #~ msgstr "Resultaat (oud)"
-
-#~ msgid "Outcome"
-#~ msgstr "Resultaat"
-
-#~ msgid ": "
-#~ msgstr ": "
