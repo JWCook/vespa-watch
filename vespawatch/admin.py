@@ -158,7 +158,7 @@ class IndividualAdmin(DeleteObjectsOneByOneMixin, ExportMixin, admin.ModelAdmin)
 
 @admin.register(ManagementAction)
 class ManagementActionAdmin(ExportMixin, admin.ModelAdmin):
-    pass
+    list_display = ('pk', '__str__')
 
 
 class ProfileInline(admin.TabularInline):
