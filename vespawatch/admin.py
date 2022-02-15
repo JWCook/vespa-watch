@@ -118,7 +118,7 @@ class NestAdmin(DeleteObjectsOneByOneMixin, ExportMixin, admin.ModelAdmin):
             r = r + ('taxon', )
         return r
 
-    list_display = ('taxon', 'inaturalist_id', 'observation_time', 'latitude', 'longitude', 'municipality', 'originates_in_vespawatch', 'has_warnings', 'inat_vv_confirmed')
+    list_display = ('taxon', 'inaturalist_id', 'pk', 'observation_time', 'latitude', 'longitude', 'municipality', 'originates_in_vespawatch', 'has_warnings', 'inat_vv_confirmed')
     readonly_fields = ('originates_in_vespawatch', 'created_at')
 
     list_filter = ('taxon', 'originates_in_vespawatch')
@@ -158,7 +158,11 @@ class IndividualAdmin(DeleteObjectsOneByOneMixin, ExportMixin, admin.ModelAdmin)
 
 @admin.register(ManagementAction)
 class ManagementActionAdmin(ExportMixin, admin.ModelAdmin):
-    list_display = ('pk', '__str__')
+    list_display = ('nest_inaturalist_id', '__str__', 'pk')
+
+    def nest_inaturalist_id(self, obj):
+        return obj.nest.inaturalist_id
+
 
 
 class ProfileInline(admin.TabularInline):
