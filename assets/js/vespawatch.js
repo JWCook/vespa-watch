@@ -1077,11 +1077,17 @@ var VwManagementTable = {
             return gettext('Details');
         },
         filteredNests: function () {
-            if (this.managementFilter == null) {
-                return this.nests;
-            } else {
-                return this.nests.filter(n => n.actionFinished === this.managementFilter);
+            let filteredNests = this.nests;
+
+            if (this.managementFilter !== null) {
+                filteredNests = filteredNests.filter(n => n.actionFinished === this.managementFilter);
             }
+
+            if (this.inatIdStringFilter !== '') {
+                filteredNests = filteredNests.filter(n => n.inaturalist_id.toString().includes(this.inatIdStringFilter));
+            }
+
+            return filteredNests;
         },
         filterLabel: function () {
             return gettext('Filter');
@@ -1119,6 +1125,7 @@ var VwManagementTable = {
     data: function () {
         return {
             managementFilter: false,  // set to true to filter on managed nests or false to filter on unmanaged nests.
+            inatIdStringFilter: '',
             nests: [],
             pageSize: 10,
             pageIndex: 0
@@ -1181,6 +1188,10 @@ var VwManagementTable = {
               <a class="dropdown-item" v-on:click="resetFilter" :class="{active: !filterSet}" href="#">{{allLabel}}</a>
             </div>
           </div>
+        </div>
+        <div>
+<!--          <label for="inatIdStringFilter">iNaturalist ID: </label>-->
+          <input id="inatIdStringFilter" class="form-control" type="text" v-model="inatIdStringFilter" placeholder="Enter iNaturalist ID to filter nests"/>
         </div>
 
         <table v-if="nests && nests.length > 0" class="table">
