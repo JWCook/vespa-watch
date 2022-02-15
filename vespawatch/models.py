@@ -829,7 +829,7 @@ class ManagementAction(models.Model):
 
     nest = models.OneToOneField(Nest, on_delete=models.CASCADE, primary_key=True)
     user = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
-    action_time = models.DateTimeField(verbose_name=_("Date and time nest removal"))
+    action_time = models.DateTimeField(verbose_name=_("Date and time nest removal"), blank=True, null=True)
     person_name = models.CharField(verbose_name=_("Reported by"), max_length=255, blank=True)
     duration = models.DurationField(verbose_name=_("Time on site (in minutes)"), null=True, blank=True)
     number_of_persons = models.IntegerField(verbose_name=_("Number of persons"), null=True)
@@ -856,7 +856,12 @@ class ManagementAction(models.Model):
         return ', '. join([problem.description for problem in self.problems.all()])
 
     def __str__(self):
-        return f'{self.action_time.strftime("%Y-%m-%d")} {self.get_result_display()}'
+        if self.action_time is None:
+            action_time_formatted = "-"
+        else:
+            action_time_formatted = self.action_time.strftime("%Y-%m-%d")
+
+        return f'{action_time_formatted} {self.get_result_display()}'
 
 
 class InatObsToDelete(models.Model):

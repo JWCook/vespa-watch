@@ -650,6 +650,9 @@ var VwManagementActionModal = {
         actionTimeLabel: function () {
             return gettext('Date and time nest removal')
         },
+        emptyValueButtonLabel: function () {
+            return gettext('Empty value')
+        },
         durationLabel: function () {
             return gettext('Time spent on site (in minutes)')
         },
@@ -814,8 +817,9 @@ var VwManagementActionModal = {
               <div class="form-group">
                 <datetime v-model="actionTime" type="datetime"
                   input-class="datetimeinput form-control">
-                  <label for="startDate" slot="before">{{ actionTimeLabel }}*</label>
+                  <label for="startDate" slot="before">{{ actionTimeLabel }}</label>
                 </datetime>
+                <a v-if="actionTime != ''" @click="actionTime = ''" href="#">{{ emptyValueButtonLabel }}</a>
               </div>
               <div class="form-group">
                 <label for="duration">{{ durationLabel }}</label>
