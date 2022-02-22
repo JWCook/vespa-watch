@@ -1196,8 +1196,10 @@ var VwManagementTable = {
 <!--          <label for="inatIdStringFilter">iNaturalist ID: </label>-->
           <input id="inatIdStringFilter" class="form-control" type="text" v-model="inatIdStringFilter" :placeholder="iNaturalist_ID_to_filter"/>
         </div>
+        
 
         <table v-if="nests && nests.length > 0" class="table">
+        
           <thead>
             <tr>
               <th>{{ dateStr }}</th>
