@@ -160,7 +160,7 @@ class IndividualAdmin(DeleteObjectsOneByOneMixin, ExportMixin, admin.ModelAdmin)
 
 @admin.register(ManagementAction)
 class ManagementActionAdmin(ExportMixin, admin.ModelAdmin):
-    search_fields = ('nest_inaturalist_id', 'pk',)
+    search_fields = ('nest__inaturalist_id',)
 
     list_display = ('nest_inaturalist_id', '__str__', 'pk')
 
