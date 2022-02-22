@@ -104,6 +104,7 @@ class DeleteObjectsOneByOneMixin():
 
 @admin.register(Nest)
 class NestAdmin(DeleteObjectsOneByOneMixin, ExportMixin, admin.ModelAdmin):
+    search_fields = ('inaturalist_id', 'pk')
     resource_class = NestResource
 
     # Some observations cannot be changed nor deleted
@@ -131,6 +132,7 @@ class NestAdmin(DeleteObjectsOneByOneMixin, ExportMixin, admin.ModelAdmin):
 
 @admin.register(Individual)
 class IndividualAdmin(DeleteObjectsOneByOneMixin, ExportMixin, admin.ModelAdmin):
+    search_fields = ('inaturalist_id',)
     resource_class = IndividualResource
 
     # Some observations cannot be changed nor deleted
@@ -158,6 +160,8 @@ class IndividualAdmin(DeleteObjectsOneByOneMixin, ExportMixin, admin.ModelAdmin)
 
 @admin.register(ManagementAction)
 class ManagementActionAdmin(ExportMixin, admin.ModelAdmin):
+    search_fields = ('nest__inaturalist_id',)
+
     list_display = ('nest_inaturalist_id', '__str__', 'pk')
 
     def nest_inaturalist_id(self, obj):
