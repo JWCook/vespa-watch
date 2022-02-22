@@ -1124,7 +1124,6 @@ var VwManagementTable = {
         iNaturalist_ID_to_filter: function() {
             return gettext('Enter iNaturalist ID to filter nests')
         }
-        )
     },
     data: function () {
         return {
@@ -1195,7 +1194,7 @@ var VwManagementTable = {
         </div>
         <div>
 <!--          <label for="inatIdStringFilter">iNaturalist ID: </label>-->
-          <input id="inatIdStringFilter" class="form-control" type="text" v-model="inatIdStringFilter" placeholder= {{ iNaturalist_ID_to_filter }}/>
+          <input id="inatIdStringFilter" class="form-control" type="text" v-model="inatIdStringFilter" :placeholder="iNaturalist_ID_to_filter"/>
         </div>
 
         <table v-if="nests && nests.length > 0" class="table">
