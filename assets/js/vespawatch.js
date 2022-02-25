@@ -826,7 +826,7 @@ var VwManagementActionModal = {
                 <input v-model="durationInMinutes" class="form-control" type="number" id="duration">
               </div>
               <div class="form-group">
-                <label for="number_of_persons">{{ nrPersonsLabel }}*</label>
+                <label for="number_of_persons">{{ nrPersonsLabel }}</label>
                 <input v-model="nrPersons" class="form-control" type="number" id="number_of_persons">
               </div>
               <div class="form-group">
@@ -840,7 +840,7 @@ var VwManagementActionModal = {
                 <input v-model="personName" class="form-control" type="text" id="personName">
               </div>
               <div class="form-group">
-                <label for="product">{{ productLabel }}*</label>
+                <label for="product">{{ productLabel }}</label>
                 <select v-model="product" class="form-control" id="product">
                   <option :value="product.value" v-for="product in availableProducts">{{ product.label }}</option>
                 </select>
